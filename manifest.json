@@ -1,0 +1,39 @@
+{
+    "author": "Guillermo Maiolo",
+    "manifest_version": 2,
+    "name": "Mlibre",
+    "description": "Mlibre",
+    "version": "0.0.1",
+    "permissions": [
+        "storage",
+        "unlimitedStorage"
+    ],
+    "browser_action": {
+        "default_title": "Mlibre",
+        "default_popup": "popup/popup.html"
+    },
+    "background": {
+        "scripts": [
+            "scripts/storage.js",
+            "scripts/item.model.js",
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "vendor/moment.min.js",
+                "vendor/chart.min.js",
+                "scripts/utils/dom.utils.js",
+                "scripts/graph.js",
+                "scripts/item.model.js",
+                "scripts/storage.js",
+                "scripts/index.js"
+            ],
+            "matches": [
+                "*://articulo.mercadolibre.com.ar/*"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
