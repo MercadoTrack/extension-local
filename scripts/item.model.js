@@ -1,66 +1,40 @@
-const success = { success: true };
-const fail = error => ({ success: false, error });
-
-// let historyMock = [{
-//     "date": "05/04/17",
-//     "price": 10959
-// }, {
-//     "date": "05/04/17",
-//     "price": 9800
-// }, {
-//     "date": "13/03/17",
-//     "price": 10959
-// }, {
-//     "date": "15/02/17",
-//     "price": 8300
-// }, {
-//     "date": "01/02/17",
-//     "price": 13450
-// }].reverse();
-
 class Item {
-    constructor(id, history) {
-        this.id = id;
-        this.history = history || [];
+    constructor({ id, history, price, thumbnail, title, permalink }) {
+
+        this.id = id.replace(/\D/g, '');
+        this.permalink = permalink;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.history = parseHistory({ history, price });
+        this.price = this.history[this.history.length - 1].price
+
     }
 
-    fetch() {
-        return fetch(this.endpoint)
+    static fetch(id) {
+        return fetch(createEndpoint(id))
             .then(pipeResponse)
-            .then(res => {
-                return res.json()
-                    .then(data => {
-                        this.loadHistory(data);
-                        this.status = success;
-                        return success;
-                    }).catch(fail);
-            }).catch(err => {
-                const error = fail(err);
-                this.status = error;
-                return error;
-            });
+            .then(res => res.json())
     }
 
-    loadHistory({ price }) {
-        const date = moment().format('DD/MM/YY');
-        // if (this.history.length === 0) {
-        //     console.info('Added mock')
-        //     this.history = historyMock;
-        // }
-        const latest = this.history[this.history.length - 1];
-        if (!latest || latest.price != price || latest.date != date) {
-            this.history.push({ price, date });
-        }
+    addHistory({ price }) {
+        this.history = parseHistory({ history: this.history, price });
+        this.price = this.history[this.history.length - 1].price
     }
 
     get endpoint() {
-        return `https://api.mercadolibre.com/items/MLA${this.id}`;
+        return createEndpoint(this.id);
     }
 
-    get price() {
-        return +this.history[0];
-    }
+}
 
+function parseHistory({ history, price }) {
+    const date = moment().format('DD/MM/YY');
+    if (!history) return [{ price, date }];
+    const latest = history[history.length - 1];
+    if (!latest || latest.price != price || latest.date != date) {
+        return [...history, { price, date }];
+    }
+    return history;
 }
 
 function pipeResponse(response) {
@@ -70,6 +44,6 @@ function pipeResponse(response) {
     return response;
 };
 
-function despiseTime(date) {
-    return date.substring(0, 10);
+function createEndpoint(id) {
+    return `https://api.mercadolibre.com/items/MLA${id}`;
 }

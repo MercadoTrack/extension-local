@@ -1,11 +1,10 @@
-Storage.get().then(update)
+Storage.get()
+    .then(items => items.forEach(update))
+    .catch(console.log)
 
-function update(items) {
-    items.forEach(updateItem);
-}
-
-function updateItem(item) {
-    return item.fetch()
-        .then(() => Storage.saveItem(item).then(success => console.log(success.message)))
-        .catch(console.warn);
+function update(item) {
+    Item.fetch(item.id)
+        .then(data => item.addHistory(data))
+        .then(() => Storage.saveItem(item)
+            .then(success => console.info(success.message)))
 }

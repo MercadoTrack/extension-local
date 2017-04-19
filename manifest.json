@@ -14,8 +14,9 @@
     },
     "background": {
         "scripts": [
-            "scripts/storage.js",
+            "vendor/moment.min.js",
             "scripts/item.model.js",
+            "scripts/storage.js",
             "background.js"
         ]
     },

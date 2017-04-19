@@ -1,5 +1,5 @@
-const error_not_found = id => ({ error: `Item ${id} not found!` });
-const success_save_item = obj => ({ message: `Saved ${Object.keys(obj)}` });
+const error_not_found = id => ({ status: 404, error: `Item ${id} not found!` });
+const success_save_item = obj => ({ status: 200, message: `Saved ${Object.keys(obj)}` });
 
 class Storage {
 
@@ -25,8 +25,10 @@ class Storage {
             local.get(key, res => {
                 const error = chrome.runtime.lastError;
                 if (error) reject(error);
-                if (!res || isEmpty(res)) reject(error_not_found(key))
-                else if(!key) resolve(pipeStorageItems(res))
+                if(!key) {
+                    if(isEmpty(res)) return console.log('Brand new storage');
+                    else resolve(pipeStorageItems(res))
+                } else if (!res || isEmpty(res)) reject(error_not_found(key))
                 else resolve(res);
             })
         })
@@ -49,7 +51,7 @@ class Storage {
             local.getBytesInUse(size => {
                 const error = chrome.runtime.lastError;
                 if (error) reject(error);
-                else resolve(size);
+                else resolve(pipeBytesToSize(size));
             })
         })
     }
@@ -63,7 +65,15 @@ function isEmpty(obj) {
 function pipeStorageItems(res) {
     const ids = Object.keys(res);
     return ids.map(id => {
-        const savedItem = res[id];
-        return new Item(id, savedItem.history)
+        const data = res[id];
+        return new Item(data);
     })
 }
+
+/* send to utils */
+function pipeBytesToSize(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
