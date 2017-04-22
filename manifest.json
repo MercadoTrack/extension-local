@@ -5,6 +5,7 @@
     "description": "Mlibre",
     "version": "0.0.1",
     "permissions": [
+        "notifications",
         "storage",
         "unlimitedStorage"
     ],
@@ -15,6 +16,7 @@
     "background": {
         "scripts": [
             "vendor/moment.min.js",
+            "scripts/utils/utils.js",
             "scripts/item.model.js",
             "scripts/storage.js",
             "background.js"
@@ -25,11 +27,12 @@
             "js": [
                 "vendor/moment.min.js",
                 "vendor/chart.min.js",
+                "scripts/utils/utils.js",
                 "scripts/utils/dom.utils.js",
                 "scripts/graph.js",
                 "scripts/item.model.js",
                 "scripts/storage.js",
-                "scripts/index.js"
+                "index.js"
             ],
             "matches": [
                 "*://articulo.mercadolibre.com.ar/*"
