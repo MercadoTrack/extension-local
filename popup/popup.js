@@ -10,12 +10,12 @@
         $container.innerHTML = '';
         Promise.all([
             Storage.getSize().then(handleSize),
-            Storage.get().tUtilshen(handleItems)
+            Storage.get().then(handleItems)
         ]);
     }
 
     function handleSize(size) {
-        $clearBtn.innerHTML = `Clear ${size}`;
+        $clearBtn.innerHTML = `Limpiar ${size}`;
     }
 
     function handleItems(items) {
