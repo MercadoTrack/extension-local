@@ -55,7 +55,7 @@
         let elems = '';
         item.history.forEach(hist => elems += `
             <div class="history">
-                <span class="date">${hist.date}:</span> <span class="money">${formatMoney(hist.price)}</span>
+                <span class="date">${hist.date}:</span> <span class="money">${Utils.formatMoney(hist.price)}</span>
             </div>`
         )
         return elems
@@ -67,13 +67,6 @@
 
     function clear() {
         return Storage.clear().then(refresh)
-    }
-
-    /* send to utils */
-    function formatMoney(value) {
-        const options = { style: 'currency', currency: 'ARS' };
-        const numberFormat = new Intl.NumberFormat('es-AR', options);
-        return numberFormat.format(value);
     }
 
 })()
