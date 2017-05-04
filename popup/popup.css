@@ -58,6 +58,16 @@ body {
     font-size: 18px;
 }
 
+.btn-delete {
+    background: #900;
+    border: 1px solid #900;
+    margin-right: 15px;
+}
+
+.price {
+    color: green;
+}
+
 a {
     color: #03b;
 }

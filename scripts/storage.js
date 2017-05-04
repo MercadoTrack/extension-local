@@ -9,6 +9,11 @@ const Storage = (() => {
             return this.save({ [item.id]: item })
         },
 
+        deleteItem(item) {
+            const local = chrome.storage.local;
+            return new Promise(resolve => local.remove(item.id, resolve))
+        },
+
         save(obj) {
             const local = chrome.storage.local;
             return new Promise((resolve, reject) => {

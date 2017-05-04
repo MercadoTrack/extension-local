@@ -1,3 +1,5 @@
+/* todo: this file must be modularized */
+
 (() => {
 
     let $container = document.getElementById('container');
@@ -27,18 +29,25 @@
         $elem.setAttribute('id', item.id)
         $elem.classList.add('item')
         $elem.innerHTML = `
-            <span class="title">${item.id} - ${wrapTitle(item.title)}</span>
+            <button class="btn btn-delete" id="delete-btn-${item.id}">&#x274C;</button>
+            <span class="title" title="${item.price} - ${item.title}">
+                <span class="price">${Utils.formatMoney(item.price)}</span> - ${wrapTitle(item.title)}
+            </span>
             <button class="btn btn-show" id="show-btn-${item.id}" type="button">+</button>
             <div class="extra-info hidden" id="extra-info-${item.id}">
                 <a class="navigate" href="${item.permalink}" target="_blank">&#128279;</a>
                 ${getHistoryElems(item)}
             </div>`
-        let $btn = $elem.querySelector(`#show-btn-${item.id}`);
+        let $showBtn = $elem.querySelector(`#show-btn-${item.id}`);
+        let $deleteBtn = $elem.querySelector(`#delete-btn-${item.id}`);
         let $extraInfo = $elem.querySelector(`#extra-info-${item.id}`);
-        $btn.addEventListener('click', () => {
-            $btn.innerHTML = $btn.innerHTML == '+' ? '-' : '+';
+        $showBtn.addEventListener('click', () => {
+            $showBtn.innerHTML = $showBtn.innerHTML == '+' ? '-' : '+';
             $extraInfo.classList.toggle('hidden')
         })
+        $deleteBtn.addEventListener('click', () => {
+            Storage.deleteItem(item).then(refresh)
+        });
         return $elem
     }
 
@@ -53,7 +62,7 @@
     }
 
     function wrapTitle(title) {
-        return title.substring(0, 25) + '...';
+        return title.substring(0, 20) + '...';
     }
 
     function clear() {
