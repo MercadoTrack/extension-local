@@ -1,5 +1,7 @@
 (() => {
 
+    /* todo: modularize properly because everything's a disaster */
+    
     const itemId = window.location.pathname.split('-')[1];
     const $chart_siblin = document.getElementById('shortDescription');
     const pipe = () => Item.fetch(itemId)
@@ -16,9 +18,9 @@
     }
 
     function handleFail() {
-        return pipe()
+        DomUtils.addTrackBtn($chart_siblin, () => pipe()
             .then(data => new Item(data))
-            .then(saveAndGraph)
+            .then(saveAndGraph))
     }
 
     function saveAndGraph(item) {

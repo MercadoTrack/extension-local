@@ -24,6 +24,21 @@ const DomUtils = (() => {
                 webkitTransition: 'height 1s ease'
             });
             return div;
+        },
+
+        addTrackBtn($elem, asyncCallback) {
+            let button = document.createElement('button')
+            button.classList.add('ui-button', 'ui-button--primary')
+            button.innerHTML = 'Seguir este articulo'
+            Object.assign(button.style, {
+                margin: '15px auto',
+                maxWidth: '50%'
+            })
+            button.addEventListener('click', () => {
+                asyncCallback()
+                    .then(() => button.parentNode.removeChild(button))
+            })
+            $elem.parentNode.insertBefore(button, $elem)
         }
 
     }
