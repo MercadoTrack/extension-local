@@ -1,38 +1,40 @@
 {
     "author": "Guillermo Maiolo",
     "manifest_version": 2,
-    "name": "Mlibre",
-    "description": "Mlibre",
-    "version": "0.0.1",
+    "name": "MercadoTrack",
+    "description": "MercadoTrack",
+    "version": "0.2.1",
     "permissions": [
-        "notifications",
         "storage",
         "unlimitedStorage"
     ],
+    "icons": {
+        "128": "images/icon_128.png"
+    },
     "browser_action": {
-        "default_title": "Mlibre",
+        "default_title": "MercadoTrack",
         "default_popup": "popup/popup.html"
     },
     "background": {
         "scripts": [
-            "vendor/moment.min.js",
-            "scripts/utils/utils.js",
-            "scripts/item.model.js",
-            "scripts/storage.js",
-            "background.js"
+            "scripts/vendor/moment.min.js",
+            "scripts/modules/utils/utils.js",
+            "scripts/modules/item.model.js",
+            "scripts/modules/storage.js",
+            "scripts/background.js"
         ]
     },
     "content_scripts": [
         {
             "js": [
-                "vendor/moment.min.js",
-                "vendor/chart.min.js",
-                "scripts/utils/utils.js",
-                "scripts/utils/dom.utils.js",
-                "scripts/graph.js",
-                "scripts/item.model.js",
-                "scripts/storage.js",
-                "main.js"
+                "scripts/vendor/moment.min.js",
+                "scripts/vendor/chart.min.js",
+                "scripts/modules/utils/utils.js",
+                "scripts/modules/utils/dom.utils.js",
+                "scripts/modules/graph.js",
+                "scripts/modules/item.model.js",
+                "scripts/modules/storage.js",
+                "scripts/main.js"
             ],
             "matches": [
                 "*://articulo.mercadolibre.com.ar/*"
