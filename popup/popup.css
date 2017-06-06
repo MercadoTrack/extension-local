@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    width: 400px;
+    width: 500px;
 }
 
 #container {
@@ -22,13 +22,18 @@ body {
     font-size: 13px;
 }
 
-.btn {
+.btn-show {
     background: #323e8f;
     color: #fff;
     border-radius: 4px;
     border: 1px solid #323e8f;
     cursor: pointer;
-    font-weight: 300;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
+    height: 32px;
+    width: 60px;
+    padding-left: inherit;
+    font-size: 18px;
 }
 
 .item {
@@ -43,25 +48,21 @@ body {
 
 .title {
     color: #333;
+    font-family: "Roboto", sans-serif;
     font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn:hover {
     opacity: .8;
 }
 
-.btn-show {
-    height: 25px;
-    width: 25px;
-    margin-left: auto;
-    font-size: 18px;
+.btn-delete-img {
+    width: 27px;
 }
 
 .btn-delete {
-    background: #900;
-    border: 1px solid #900;
     margin-right: 15px;
+    height: 32px;
 }
 
 .price {
@@ -96,10 +97,14 @@ a {
 }
 
 .history {
-    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.history-item {
+    padding: 5px 10px;
+    font-family: "Roboto", sans-serif;
 }
 
 .money {
@@ -107,5 +112,5 @@ a {
 }
 
 .date {
-    margin-right: auto;
+    padding-right: 20px;
 }
