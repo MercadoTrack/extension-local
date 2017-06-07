@@ -1,16 +1,23 @@
 <html>
 
 <head>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <link href="popup.css" rel="stylesheet" type="text/css">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
 </head>
 
 <body>
-
-    <div class="size-and-clear">
-        <button class="btn" id="clear"></button>
-    </div>
     <div id="container"></div>
+    <div class="size-and-clear">
+            <button class="btn red" id="clear"></button>
+    </div>
 
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/materialize.min.js"></script>
+    
     <script type="text/javascript" src="../scripts/vendor/moment.min.js"></script>
     <script type="text/javascript" src="../scripts/modules/utils/utils.js"></script>
     <script type="text/javascript" src="../scripts/modules/item.model.js"></script>
