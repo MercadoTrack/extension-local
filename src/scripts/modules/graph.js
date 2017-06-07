@@ -1,3 +1,7 @@
+import Chart from 'chart.js'
+import DomUtils from './utils/dom.utils'
+import Utils from './utils/utils'
+
 const Graph = (() => {
 
     const defaults = {
@@ -20,3 +24,5 @@ const Graph = (() => {
     return Graph
 
 })()
+
+export default Graph

@@ -1,3 +1,7 @@
+import Item from './modules/item.model'
+import Storage from './modules/storage'
+import Graph from './modules/graph'
+
 (() => {
 
     /* todo: modularize properly because everything's a disaster */

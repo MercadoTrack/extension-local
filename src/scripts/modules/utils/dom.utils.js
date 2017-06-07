@@ -74,3 +74,5 @@ const DomUtils = (() => {
     }
 
 })()
+
+export default DomUtils

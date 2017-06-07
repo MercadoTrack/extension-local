@@ -1,4 +1,6 @@
 /* todo: this file must be modularized */
+import Storage from '../scripts/modules/storage'
+import Utils from '../scripts/modules/utils/utils'
 
 (() => {
 

@@ -1,3 +1,6 @@
+import Storage from './modules/storage'
+import Item from './modules/item.model'
+
 (() => {
 
     Storage.get()

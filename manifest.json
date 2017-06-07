@@ -13,28 +13,17 @@
     },
     "browser_action": {
         "default_title": "MercadoTrack",
-        "default_popup": "popup/popup.html"
+        "default_popup": "dist/popup.html"
     },
     "background": {
         "scripts": [
-            "scripts/vendor/moment.min.js",
-            "scripts/modules/utils/utils.js",
-            "scripts/modules/item.model.js",
-            "scripts/modules/storage.js",
-            "scripts/background.js"
+            "dist/background.bundle.js"
         ]
     },
     "content_scripts": [
         {
             "js": [
-                "scripts/vendor/moment.min.js",
-                "scripts/vendor/chart.min.js",
-                "scripts/modules/utils/utils.js",
-                "scripts/modules/utils/dom.utils.js",
-                "scripts/modules/graph.js",
-                "scripts/modules/item.model.js",
-                "scripts/modules/storage.js",
-                "scripts/main.js"
+                "dist/content.bundle.js"
             ],
             "matches": [
                 "*://articulo.mercadolibre.com.ar/*"
