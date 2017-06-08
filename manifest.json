@@ -13,17 +13,17 @@
     },
     "browser_action": {
         "default_title": "MercadoTrack",
-        "default_popup": "dist/popup.html"
+        "default_popup": "popup/popup.html"
     },
     "background": {
         "scripts": [
-            "dist/background.bundle.js"
+            "scripts/background.bundle.js"
         ]
     },
     "content_scripts": [
         {
             "js": [
-                "dist/content.bundle.js"
+                "scripts/content.bundle.js"
             ],
             "matches": [
                 "*://articulo.mercadolibre.com.ar/*"
