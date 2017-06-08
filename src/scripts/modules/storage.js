@@ -4,7 +4,7 @@ import Item from './item.model'
 const error_not_found = id => ({ status: 404, error: `Item ${id} not found!` });
 const success_save_item = obj => ({ status: 200, message: `Saved ${Object.keys(obj)}` });
 
-let Storage = {
+export default {
 
     saveItem(item) {
         return this.save({ [item.id]: item })
@@ -73,5 +73,3 @@ function pipeStorageItems(res) {
         return new Item(data);
     })
 }
-
-export default Storage;
