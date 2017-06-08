@@ -4,7 +4,7 @@
   "description": "MercadoTrack",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "start": "webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
