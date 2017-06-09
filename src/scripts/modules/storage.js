@@ -1,8 +1,8 @@
 import Utils from './utils/utils'
 import Item from './item.model'
 
-const error_not_found = id => ({ status: 404, error: `Item ${id} not found!` });
-const success_save_item = obj => ({ status: 200, message: `Saved ${Object.keys(obj)}` });
+const errorNotFound = id => ({ status: 404, error: `Item ${id} not found!` });
+const successSaveItem = obj => ({ status: 200, message: `Saved ${Object.keys(obj)}` });
 
 export default {
 
@@ -18,11 +18,11 @@ export default {
     save(obj) {
         const local = chrome.storage.local;
         return new Promise((resolve, reject) => {
-            local.set(obj, res => {
+            local.set(obj, () => {
                 const error = chrome.runtime.lastError;
                 if (error) reject(error);
                 /* maybe return the same object to pipe */
-                else resolve(success_save_item(obj));
+                else resolve(successSaveItem(obj));
             })
         })
     },
@@ -36,7 +36,7 @@ export default {
                 if (!key) {
                     if (Utils.isEmpty(res)) return console.log('Brand new storage');
                     else resolve(pipeStorageItems(res))
-                } else if (!res || Utils.isEmpty(res)) reject(error_not_found(key))
+                } else if (!res || Utils.isEmpty(res)) reject(errorNotFound(key))
                 else resolve(res);
             })
         })

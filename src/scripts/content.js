@@ -7,7 +7,7 @@ import Graph from './modules/graph'
     /* todo: modularize properly because everything's a disaster */
     
     const itemId = window.location.pathname.split('-')[1];
-    const $chart_siblin = document.getElementById('shortDescription');
+    const $chartSiblin = document.getElementById('shortDescription');
     const pipe = () => Item.fetch(itemId)
 
     Storage.get(itemId)
@@ -22,7 +22,7 @@ import Graph from './modules/graph'
     }
 
     function handleFail() {
-        DomUtils.addTrackBtn($chart_siblin, () => pipe()
+        DomUtils.addTrackBtn($chartSiblin, () => pipe()
             .then(data => new Item(data))
             .then(saveAndGraph))
     }
@@ -30,7 +30,7 @@ import Graph from './modules/graph'
     function saveAndGraph(item) {
         if (!item) throw `No item fetched with id ${itemId}`;
         return Storage.saveItem(item)
-            .then(() => Graph.show(item, $chart_siblin))
+            .then(() => Graph.show(item, $chartSiblin))
     }
 
 })()

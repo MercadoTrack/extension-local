@@ -1,8 +1,10 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WebpackNotifierPlugin = require('webpack-notifier')
 
 const paths = {
     src: './src',
-    dist: `${__dirname}/dist`
+    dist: `${__dirname}/dist`,
+    logo: `${__dirname}/images/icon_128.png`
 }
 
 module.exports = {
@@ -16,6 +18,7 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     plugins: [
+        new WebpackNotifierPlugin({ title: 'MercadoTrack', contentImage: paths.logo }),
         new CopyWebpackPlugin([
             { from: `${paths.src}/popup/popup.html`, to: `${paths.dist}/popup` },
             { from: `${paths.src}/popup/popup.css`, to: `${paths.dist}/popup` },
@@ -23,5 +26,36 @@ module.exports = {
             { from: './manifest.json', to: paths.dist },
             { from: './LICENSE', to: paths.dist },
         ])
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'eslint-loader',
+                    /* needs a bit more tunning */
+                    options: {
+                        useEslintrc: false,
+                        envs: ['browser', 'es6'],
+                        extends: 'eslint:recommended',
+                        parserOptions: {
+                            sourceType: 'module'
+                        },
+                        rules: {
+                            'quotes': ['error', 'single'],
+                            'no-irregular-whitespace': ['error'],
+                            'no-unused-vars': ['error'],
+                            'camelcase': ['error'],
+                            'no-array-constructor': ['error'],
+                            'no-mixed-spaces-and-tabs': ['error'],
+                            'no-multiple-empty-lines': ['error'],
+                            'no-var': ['error']
+                        }
+                    }
+                }
+            }
+        ],
+    },
 }
