@@ -1,6 +1,7 @@
 import Item from './modules/item.model'
 import Storage from './modules/storage'
 import Graph from './modules/graph'
+import DomUtils from './modules/utils/dom.utils'
 
 (() => {
 

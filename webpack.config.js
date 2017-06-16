@@ -51,7 +51,8 @@ module.exports = {
                             'no-array-constructor': ['error'],
                             'no-mixed-spaces-and-tabs': ['error'],
                             'no-multiple-empty-lines': ['error'],
-                            'no-var': ['error']
+                            'no-var': ['error'], 
+                            'no-undef': ['error']
                         }
                     }
                 }
