@@ -8,6 +8,8 @@ const paths = {
 }
 
 module.exports = {
+    cache: true,
+    devtool: 'source-map',
     entry: {
         content: `${paths.src}/scripts/content.js`,
         background: `${paths.src}/scripts/background.js`,

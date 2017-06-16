@@ -1,3 +1,5 @@
+/* global chrome */
+
 import Utils from './utils/utils'
 import Item from './item.model'
 
