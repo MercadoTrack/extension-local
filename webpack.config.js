@@ -22,8 +22,7 @@ module.exports = {
     plugins: [
         new WebpackNotifierPlugin({ title: 'MercadoTrack', contentImage: paths.logo }),
         new CopyWebpackPlugin([
-            { from: `${paths.src}/popup/popup.html`, to: `${paths.dist}/popup` },
-            { from: `${paths.src}/popup/popup.css`, to: `${paths.dist}/popup` },
+            { from: `${paths.src}/popup/popup.html`, to: paths.dist },
             { from: './images', to: `${paths.dist}/images` },
             { from: './manifest.json', to: paths.dist },
             { from: './LICENSE', to: paths.dist },
@@ -31,6 +30,14 @@ module.exports = {
     ],
     module: {
         rules: [
+            {
+                test: /\.(sass|scss)$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -53,7 +60,7 @@ module.exports = {
                             'no-array-constructor': ['error'],
                             'no-mixed-spaces-and-tabs': ['error'],
                             'no-multiple-empty-lines': ['error'],
-                            'no-var': ['error'], 
+                            'no-var': ['error'],
                             'no-undef': ['error']
                         }
                     }
