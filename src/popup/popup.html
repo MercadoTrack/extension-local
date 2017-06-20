@@ -6,11 +6,31 @@
 </head>
 
 <body>
-    <div class="size-and-clear">
-        <button class="btn" id="clear"></button>
-    </div>
 
-    <div id="container"></div>
+    <div id="app">
+
+        <div class="size-and-clear">
+            <button class="btn" id="clear" v-on:click="clear">Limpiar {{ size }}</button>
+        </div>
+
+        <!-- todo: fix this and move to components -->
+        <div class="container">
+            <div v-for="item in items">
+                <button class="btn btn-delete" id="delete-btn-${item.id}">&#x274C;</button>
+                <span class="title" title="${item.price} - ${item.title}">
+                <span class="price">price</span> - title
+                </span>
+                <button class="btn btn-show"type="button">+</button>
+                <div class="extra-info hidden">
+                    <a class="navigate" href="${item.permalink}" target="_blank">&#128279;</a>
+                    <div v-for="hist in item.history" class="history">
+                        <span class="date">hist.date</span> <span class="money">hist.price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <script type="text/javascript" src="./scripts/popup.bundle.js"></script>
 </body>
