@@ -10,7 +10,6 @@ Vue.filter('price', Utils.formatMoney)
 
 new Vue({
     el: '#app',
-    store,
     created() {
         this.refresh()
     },
