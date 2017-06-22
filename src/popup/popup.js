@@ -1,31 +1,47 @@
-/* todo: this file must be modularized */
-/* eslint-disable */
 import Storage from '../scripts/modules/storage'
 import Utils from '../scripts/modules/utils/utils'
+import store from './store'
 import Vue from 'vue'
 import '../../node_modules/materialize-css/dist/js/materialize.min'
 import './popup.sass'
 
-/* todo: add missing functionality and modularize */
+Vue.filter('title', Utils.trimTitle)
+Vue.filter('price', Utils.formatMoney)
 
-(() => {
-
-    new Vue({
-        el: '#app',
-        data: {
-            size: 0, 
-            items: []
+new Vue({
+    el: '#app',
+    store,
+    created() {
+        this.refresh()
+    },
+    computed: {
+        size: () => store.state.size,
+        items: () => store.state.items
+    },
+    methods: {
+        updateSize() {
+            Storage.getSize().then(size => store.dispatch('UPDATE_SIZE', size))
         },
-        methods: {
-            refresh() {
-                Promise.all([
-                    Storage.getSize().then(size => this.size = size), 
-                    Storage.get().then(items => this.items = items)
-                ]);
-            },
-            clear() { Storage.clear().then(this.refresh) }
+        updateItems() {
+            Storage.get()
+                .then(items => store.dispatch('UPDATE_ITEMS', items))
+                .catch(() => store.dispatch('UPDATE_ITEMS'))
         },
-        created() { this.refresh() }
-    })
-
-})()
+        refresh() {
+            this.updateSize()
+            this.updateItems()
+        },
+        clear() {
+            Storage.clear().then(this.refresh)
+        },
+        remove(item) {
+            Storage.deleteItem(item).then(this.refresh)
+        },
+        toggleHistory(item) {
+            store.dispatch('TOGGLE_HISTORY', item.id)
+        },
+        isShowingHistory(item) {
+            return store.state.showing.includes(item.id)
+        }
+    }
+})

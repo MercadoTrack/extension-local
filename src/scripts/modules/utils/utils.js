@@ -7,6 +7,10 @@ export default {
         return numberFormat.format(value);
     },
 
+    trimTitle(title) {
+        return title.substring(0, 25) + '...'
+    },
+
     isEmpty(obj) {
         return typeof obj === 'object' && Object.getOwnPropertyNames(obj).length === 0;
     },

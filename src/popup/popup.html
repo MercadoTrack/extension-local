@@ -1,8 +1,8 @@
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">-->
 </head>
 
 <body>
@@ -10,22 +10,19 @@
     <div id="app">
 
         <div class="size-and-clear">
-            <button class="btn" id="clear" v-on:click="clear">Limpiar {{ size }}</button>
+            <button class="btn" id="clear" @click="clear">Limpiar {{ size }}</button>
         </div>
 
-        <!-- todo: fix this and move to components -->
-        <div class="container">
-            <div v-for="item in items">
-                <button class="btn btn-delete" id="delete-btn-${item.id}">&#x274C;</button>
-                <span class="title" title="${item.price} - ${item.title}">
-                <span class="price">price</span> - title
-                </span>
-                <button class="btn btn-show"type="button">+</button>
-                <div class="extra-info hidden">
-                    <a class="navigate" href="${item.permalink}" target="_blank">&#128279;</a>
-                    <div v-for="hist in item.history" class="history">
-                        <span class="date">hist.date</span> <span class="money">hist.price</span>
-                    </div>
+        <div v-for="item in items" class="item">
+            <button @click="remove(item)" class="btn btn-delete">x</button>
+            <span class="title" :title="item.title">
+                <span class="price">{{ item.price | price }}</span> - {{ item.title | title }}
+            </span>
+            <button @click="toggleHistory(item)" class="btn btn-show" type="button">-</button>
+            <div class="extra-info" v-if="isShowingHistory(item)">
+                <a class="navigate" :href="item.permalink" target="_blank">*</a>
+                <div class="history" v-for="history in item.history">
+                    <span class="date">{{ history.date }}:</span> <span class="money">{{ history.price | price }}</span>
                 </div>
             </div>
         </div>
