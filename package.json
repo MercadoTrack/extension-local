@@ -21,7 +21,7 @@
     "chart.js": "2.5.0",
     "materialize-css": "^0.98.2",
     "moment": "^2.18.1",
-    "vue": "^1.0.28-csp",
+    "vue": "1.0.28-csp",
     "vuex": "^1.0.0"
   },
   "devDependencies": {
