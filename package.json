@@ -8,7 +8,7 @@
     //"start": "del dist && webpack --progress --colors --watch",
     //"build": "del dist && webpack --config ./webpack.config.prod.js --progress --colors"
 
-    //Linux
+    //Linux 
     "start": "rm -rf dist && webpack --progress --colors --watch",
     "build": "rm -rf dist && webpack --config ./webpack.config.prod.js --progress --colors"
   },
