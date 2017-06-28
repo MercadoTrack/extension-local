@@ -1,9 +1,9 @@
-import Storage from '../scripts/modules/storage'
-import Utils from '../scripts/modules/utils/utils'
-import store from './store'
-import Vue from 'vue'
-import '../../node_modules/materialize-css/dist/js/materialize.min'
-import './popup.sass'
+import Storage from '../scripts/modules/storage';
+import Utils from '../scripts/modules/utils/utils';
+import store from './store';
+import Vue from 'vue';
+import '../../node_modules/materialize-css/dist/js/materialize.min.js';
+import './popup.sass';
 
 Vue.filter('title', Utils.trimTitle)
 Vue.filter('price', Utils.formatMoney)

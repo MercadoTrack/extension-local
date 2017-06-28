@@ -1,6 +1,6 @@
 body
     text-align: center;
-    min-width: 400px;
+    min-width: 470px;
 
 #container
     width: 90%;
@@ -17,8 +17,8 @@ body
         font-size: 13px;
 
 .btn
-    background: #323e8f;
-    color: #fff;
+    //background: #323e8f;
+    //color: #fff;
     border-radius: 4px;
     border: 1px solid #323e8f;
     cursor: pointer;
@@ -29,28 +29,38 @@ body
     padding: 10px 10px;
     text-align: left;
     min-height: 25px;
-    display: flex;
+    display: block;
     align-items: center;
-    flex-wrap: wrap;
 
 .title
     color: #333;
-    font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    width: 300px;
 
 .btn:hover
     opacity: .8;
 
 .btn-show
-    height: 25px;
-    width: 25px;
-    margin-left: auto;
+    height: 32px;
+    width: 60px;
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    border-radius: 4px;
+    border: 1px solid  #323e8f;
+    cursor: pointer;
     font-size: 18px;
 
-.btn-delete
-    background: #900;
-    border: 1px solid #900;
+.btn-delete 
+    padding: 0px 15px 0px 15px;
+    border: 1px solid; //#900;
     margin-right: 15px;
+
+.btn-delete-img
+    width: 27px;
+    content: url('../../images/Material Icons/trash-bin-black-big.png');
+
+.expand-white
+    content: url('../../images/Material Icons/expand_more_white.png');
 
 .price
     color: green;
@@ -79,13 +89,23 @@ a
     opacity: .8;
 
 .history
-    width: 100%;
-    display: flex;
     align-items: center;
     flex-wrap: wrap;
+
+.history-item
+    padding: 5px 10px;
+    margin: 0px 0px 2px 0px;
+
+.clear-all
+    width: 24px;
+
+.clear-all-img
+    content: url('../../images/Material Icons/trash-bin-forever-black-big.png');
+    width: 32px;
 
 .money
     margin-left: auto;
 
 .date
     margin-right: auto;
+    padding: 0px 10px 0px 0px;

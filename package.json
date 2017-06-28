@@ -4,13 +4,8 @@
   "description": "MercadoTrack",
   "main": "index.js",
   "scripts": {
-    //Windows 
-    //"start": "del dist && webpack --progress --colors --watch",
-    //"build": "del dist && webpack --config ./webpack.config.prod.js --progress --colors"
-
-    //Linux
-    "start": "rm -rf dist && webpack --progress --colors --watch",
-    "build": "rm -rf dist && webpack --config ./webpack.config.prod.js --progress --colors"
+    "start": "del dist && webpack --progress --colors --watch",
+    "build": "del dist && webpack --config ./webpack.config.prod.js --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -40,6 +35,7 @@
     "style-loader": "^0.18.2",
     "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.3",
+    "url-loader": "^0.5.9",
     "webpack": "^2.6.1",
     "webpack-notifier": "^1.5.0"
   }

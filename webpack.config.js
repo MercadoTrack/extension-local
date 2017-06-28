@@ -46,6 +46,12 @@ module.exports = {
                 ]
             },
             {
+                test: /\.png$/,
+                use: [{
+                    loader: 'url-loader'
+                }],
+            },
+            {
                 enforce: 'pre',
                 test: /\.js$/,
                 exclude: /(node_modules)/,

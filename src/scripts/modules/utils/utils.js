@@ -8,7 +8,7 @@ export default {
     },
 
     trimTitle(title) {
-        return title.substring(0, 25) + '...'
+        return title.substring(0, 30) + '...'
     },
 
     isEmpty(obj) {
