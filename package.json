@@ -4,6 +4,11 @@
   "description": "MercadoTrack",
   "main": "index.js",
   "scripts": {
+    //Windows 
+    //"start": "del dist && webpack --progress --colors --watch",
+    //"build": "del dist && webpack --config ./webpack.config.prod.js --progress --colors"
+
+    //Linux
     "start": "rm -rf dist && webpack --progress --colors --watch",
     "build": "rm -rf dist && webpack --config ./webpack.config.prod.js --progress --colors"
   },
