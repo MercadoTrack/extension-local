@@ -2,7 +2,7 @@ import Storage from '../scripts/modules/storage';
 import Utils from '../scripts/modules/utils/utils';
 import store from './store';
 import Vue from 'vue';
-import '../../node_modules/materialize-css/dist/js/materialize.min.js';
+import 'materialize-css';
 import './popup.sass';
 
 Vue.filter('title', Utils.trimTitle)

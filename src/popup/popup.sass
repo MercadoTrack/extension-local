@@ -1,111 +1,57 @@
+$border-size: 1px
+
 body
-    text-align: center;
-    min-width: 470px;
+    text-align: center
+    min-width: 500px
+    min-height: 200px
+
+.material-icons, 
+.btn-text 
+    vertical-align: middle
 
 #container
-    width: 90%;
-    margin: auto;
+    width: 90%
+    margin: auto
 
 .hidden
-    display: none !important;
+    display: none !important
 
 .size-and-clear
-    padding: 10px 10px;
-    font-size: 16px;
-    .btn
-        min-height: 35px;
-        font-size: 13px;
-
-.btn
-    //background: #323e8f;
-    //color: #fff;
-    border-radius: 4px;
-    border: 1px solid #323e8f;
-    cursor: pointer;
-    font-weight: 300;
+    padding: 10px 0
 
 .item
-    border-top: 1px solid lightgray;
-    padding: 10px 10px;
-    text-align: left;
-    min-height: 25px;
-    display: block;
-    align-items: center;
+    border-bottom: $border-size solid lightgray
+    padding: 10px 0
+    margin: 0 10px
+    align-items: center
+    display: flex
+    flex-wrap: wrap
 
-.title
-    color: #333;
-    font-size: 14px;
-    width: 300px;
-
-.btn:hover
-    opacity: .8;
-
-.btn-show
-    height: 32px;
-    width: 60px;
-    margin: 0px 0px 0px 10px;
-    padding: 0px;
-    border-radius: 4px;
-    border: 1px solid  #323e8f;
-    cursor: pointer;
-    font-size: 18px;
-
-.btn-delete 
-    padding: 0px 15px 0px 15px;
-    border: 1px solid; //#900;
-    margin-right: 15px;
-
-.btn-delete-img
-    width: 27px;
-    content: url('../../images/Material Icons/trash-bin-black-big.png');
-
-.expand-white
-    content: url('../../images/Material Icons/expand_more_white.png');
-
-.price
-    color: green;
-
-a
-    color: #03b;
-
-.extra-info
-    position: relative;
-    width: 100%;
-    padding: 0px 25%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 13px;
-    min-height: 40px;
-
-.navigate
-    position: absolute;
-    top: 0;
-    left: 15px;
-    font-size: 29px;
-    text-decoration: none;
-
-.navigate:hover
-    opacity: .8;
-
-.history
-    align-items: center;
-    flex-wrap: wrap;
-
-.history-item
-    padding: 5px 10px;
-    margin: 0px 0px 2px 0px;
-
-.clear-all
-    width: 24px;
-
-.clear-all-img
-    content: url('../../images/Material Icons/trash-bin-forever-black-big.png');
-    width: 32px;
-
-.money
-    margin-left: auto;
-
-.date
-    margin-right: auto;
-    padding: 0px 10px 0px 0px;
+    .remove-item-btn
+        margin-right: auto
+        .material-icons
+            color: black
+    .title-wrapper
+        color: #333
+        font-size: 14px
+        flex-grow: 2
+        .price
+            color: green
+    .btn-show
+        margin-left: auto
+        width: 60px
+        padding: 0px
+        cursor: pointer
+        font-size: 18px
+    .extra-info
+        margin: auto
+        font-size: 13px
+        padding-top: 10px
+        .history
+            margin: 0
+            .history-item
+                padding: 5px 10px
+                margin: 0 0 -#{$border-size} 0
+                .date
+                    margin-right: auto
+                    padding: 0px 10px 0px 0px

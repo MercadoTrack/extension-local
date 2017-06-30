@@ -1,23 +1,24 @@
 <html>
 
 <head>
-    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 </head>
 
 <body>
     <div id="app">
         <div v-for="item in items" class="item">
-            <button @click="remove(item)" class="btn btn-delete amber accent-3">
-                <img class="btn-delete-img"></img>
+            <button @click="remove(item)" class="remove-item-btn btn waves-effect waves-light yellow">
+                <i class="material-icons">delete</i>
             </button>
-            <a :href="item.permalink" target="_blank">
+            <a class="title-wrapper" :href="item.permalink" target="_blank">
                 <span class="title" :title="item.title">
                     <span class="price">{{ item.price | price }}</span> - {{ item.title | title }}
                 </span>
             </a>
-            <button @click="toggleHistory(item)" class="btn btn-show indigo" type="button">
-                <img class="expand-white">
+            <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show indigo" type="button">
+                <i v-if="isShowingHistory(item)" class="material-icons">keyboard_arrow_up</i>
+                <i v-else class="material-icons">keyboard_arrow_down</i>
             </button>
             <div class="extra-info" v-if="isShowingHistory(item)">
                 <ul class="history">
@@ -25,12 +26,26 @@
                         <span class="date">{{ historyPrice.date }}: </span>
                         <span>{{ historyPrice.price | price}}</span>
                     </li>
+                    <li class="history-item collection" v-for="historyPrice in item.history">
+                        <span class="date">{{ historyPrice.date }}: </span>
+                        <span>{{ historyPrice.price | price}}</span>
+                    </li>
+                    <li class="history-item collection" v-for="historyPrice in item.history">
+                        <span class="date">{{ historyPrice.date }}: </span>
+                        <span>{{ historyPrice.price | price}}</span>
+                    </li>
+                    <li class="history-item collection" v-for="historyPrice in item.history">
+                        <span class="date">{{ historyPrice.date }}: </span>
+                        <span>{{ historyPrice.price | price}}</span>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
         <div class="size-and-clear">
-            <button class="btn red" title="Clear all items" id="clear" @click="clear">
-                <img class="clear-all-img"></img>
+            <button class="waves-effect waves-light btn indigo" title="Clear all items" id="clear" @click="clear">
+                <span class="btn-text">Limpiar</span>
+                <i class="material-icons">delete</i>
             </button>
         </div>
     </div>
