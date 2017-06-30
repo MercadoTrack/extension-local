@@ -4,8 +4,8 @@
   "description": "MercadoTrack",
   "main": "index.js",
   "scripts": {
-    "start": "del dist && webpack --progress --colors --watch",
-    "build": "del dist && webpack --config ./webpack.config.prod.js --progress --colors"
+    "start": "rm -rf dist && webpack --progress --colors --watch",
+    "build": "rm -rf dist && webpack --config ./webpack.config.prod.js --progress --colors"
   },
   "repository": {
     "type": "git",
