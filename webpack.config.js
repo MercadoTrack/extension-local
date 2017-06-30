@@ -31,12 +31,25 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader',
+                    options: { minimize: true }
+                }],
+            },
+            {
                 test: /\.(sass|scss)$/,
                 use: [
                     'style-loader',
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.png$/,
+                use: [{
+                    loader: 'url-loader'
+                }],
             },
             {
                 enforce: 'pre',

@@ -36,7 +36,7 @@ export default {
                 const error = chrome.runtime.lastError;
                 if (error) reject(error);
                 if (!key) {
-                    if (Utils.isEmpty(res)) return console.log('Brand new storage');
+                    if (Utils.isEmpty(res)) reject('Brand new storage');
                     else resolve(pipeStorageItems(res))
                 } else if (!res || Utils.isEmpty(res)) reject(errorNotFound(key))
                 else resolve(res);

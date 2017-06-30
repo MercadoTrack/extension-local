@@ -1,76 +1,46 @@
-/* todo: this file must be modularized */
-import Storage from '../scripts/modules/storage'
-import Utils from '../scripts/modules/utils/utils'
-import '../../node_modules/materialize-css/dist/js/materialize.min'
-import './popup.sass'
+import Storage from '../scripts/modules/storage';
+import Utils from '../scripts/modules/utils/utils';
+import store from './store';
+import Vue from 'vue';
+import '../../node_modules/materialize-css/dist/js/materialize.min.js';
+import './popup.sass';
 
-(() => {
+Vue.filter('title', Utils.trimTitle)
+Vue.filter('price', Utils.formatMoney)
 
-    let $container = document.getElementById('container');
-    let $clearBtn = document.getElementById('clear');
-    $clearBtn.addEventListener('click', clear);
-
-    refresh();
-
-    function refresh() {
-        $container.innerHTML = '';
-        Promise.all([
-            Storage.getSize().then(handleSize),
-            Storage.get().then(handleItems)
-        ]);
+new Vue({
+    el: '#app',
+    created() {
+        this.refresh()
+    },
+    computed: {
+        size: () => store.state.size,
+        items: () => store.state.items
+    },
+    methods: {
+        updateSize() {
+            Storage.getSize().then(size => store.dispatch('UPDATE_SIZE', size))
+        },
+        updateItems() {
+            Storage.get()
+                .then(items => store.dispatch('UPDATE_ITEMS', items))
+                .catch(() => store.dispatch('UPDATE_ITEMS'))
+        },
+        refresh() {
+            this.updateSize()
+            this.updateItems()
+        },
+        clear() {
+            Storage.clear().then(this.refresh)
+        },
+        remove(item) {
+            Storage.deleteItem(item).then(this.refresh)
+        },
+        toggleHistory(item) {
+            store.dispatch('TOGGLE_HISTORY', item.id)
+        },
+        isShowingHistory(item) {
+            return store.state.showing.includes(item.id)
+        }
     }
-
-    function handleSize(size) {
-        $clearBtn.innerHTML = `Limpiar ${size}`;
-    }
-
-    function handleItems(items) {
-        items.forEach(item => $container.appendChild(createItemElem(item)))
-    }
-
-    function createItemElem(item) {
-        let $elem = document.createElement('div')
-        $elem.setAttribute('id', item.id)
-        $elem.classList.add('item')
-        $elem.innerHTML = `
-            <button class="btn btn-delete" id="delete-btn-${item.id}">&#x274C;</button>
-            <span class="title" title="${item.price} - ${item.title}">
-                <span class="price">${Utils.formatMoney(item.price)}</span> - ${wrapTitle(item.title)}
-            </span>
-            <button class="btn btn-show" id="show-btn-${item.id}" type="button">+</button>
-            <div class="extra-info hidden" id="extra-info-${item.id}">
-                <a class="navigate" href="${item.permalink}" target="_blank">&#128279;</a>
-                ${getHistoryElems(item)}
-            </div>`
-        let $showBtn = $elem.querySelector(`#show-btn-${item.id}`);
-        let $deleteBtn = $elem.querySelector(`#delete-btn-${item.id}`);
-        let $extraInfo = $elem.querySelector(`#extra-info-${item.id}`);
-        $showBtn.addEventListener('click', () => {
-            $showBtn.innerHTML = $showBtn.innerHTML == '+' ? '-' : '+';
-            $extraInfo.classList.toggle('hidden')
-        })
-        $deleteBtn.addEventListener('click', () => {
-            Storage.deleteItem(item).then(refresh)
-        });
-        return $elem
-    }
-
-    function getHistoryElems(item) {
-        let elems = '';
-        item.history.forEach(hist => elems += `
-            <div class="history">
-                <span class="date">${hist.date}:</span> <span class="money">${Utils.formatMoney(hist.price)}</span>
-            </div>`
-        )
-        return elems
-    }
-
-    function wrapTitle(title) {
-        return title.substring(0, 20) + '...';
-    }
-
-    function clear() {
-        return Storage.clear().then(refresh)
-    }
-
-})()
+})

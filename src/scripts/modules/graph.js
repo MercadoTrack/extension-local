@@ -12,8 +12,7 @@ Object.assign(Chart.defaults.global, defaults);
 
 export default {
     show(item, $elem) {
-        let canvas = DomUtils.createCanvas();
-        let container = DomUtils.createContainer(canvas, item.history.length);
+        let { container, canvas } = DomUtils.initDOM(item.history.length);
         $elem.parentNode.insertBefore(container, $elem);
         return new Chart(canvas, Utils.getItemChartOptions(item));
     }
