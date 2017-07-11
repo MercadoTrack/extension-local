@@ -1,7 +1,20 @@
 import containerHtml from './templates/container.html'
 import trackBtnHtml from './templates/track.btn.html'
 
+
+/* TODO: move to constants module along with all strings in the app */
+const githubIssuesUrl = 'https://github.com/GMaiolo/mercado-track/issues';
+const FATAL_ERROR = `[MercadoTrack] La extensión no puede funcionar debido a un cambio de diseño por parte del equipo de MercadoLibre.
+Por favor contactate con los desarrolladores a través de un issue en GitHub: ${githubIssuesUrl}`
+
 export default {
+
+    getChartSiblin() {
+        const shortDescription = document.getElementById('shortDescription');
+        const productGalleryCollection = document.getElementById('productGalleryCollection');
+        if(!shortDescription && !productGalleryCollection) throw new Error(FATAL_ERROR)
+        return shortDescription || productGalleryCollection
+    },
 
     initDOM(itemsCount) {
         let container = htmlToElement(containerHtml)
@@ -12,7 +25,9 @@ export default {
     },
 
     createTrackBtn() {
-        return htmlToElement(trackBtnHtml)
+        const container = htmlToElement(trackBtnHtml)
+        const trackBtn = container.querySelector('#mt-track')
+        return { container, trackBtn }
     }
 
 }
