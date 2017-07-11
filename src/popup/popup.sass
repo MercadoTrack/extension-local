@@ -1,0 +1,57 @@
+$border-size: 1px
+
+body
+    text-align: center
+    min-width: 500px
+    min-height: 200px
+
+.material-icons, 
+.btn-text 
+    vertical-align: middle
+
+#container
+    width: 90%
+    margin: auto
+
+.hidden
+    display: none !important
+
+.size-and-clear
+    padding: 10px 0
+
+.item
+    border-bottom: $border-size solid lightgray
+    padding: 10px 0
+    margin: 0 10px
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+
+    .remove-item-btn
+        margin-right: auto
+        .material-icons
+            color: black
+    .title-wrapper
+        color: #333
+        font-size: 14px
+        flex-grow: 2
+        .price
+            color: green
+    .btn-show
+        margin-left: auto
+        width: 60px
+        padding: 0px
+        cursor: pointer
+        font-size: 18px
+    .extra-info
+        margin: auto
+        font-size: 13px
+        padding-top: 10px
+        .history
+            margin: 0
+            .history-item
+                padding: 5px 10px
+                margin: 0 0 -#{$border-size} 0
+                .date
+                    margin-right: auto
+                    padding: 0px 10px 0px 0px

@@ -15,8 +15,9 @@ _Chrome plugin to track products in MercadoLibre Argentina and visualize their p
 Manual Installation: 
 
 1. Clone/download the project
-2. Go to [Chrome's extensions page](chrome://extensions/)
-3. Click on "Load unpacked extension..." button
-4. Select the project folder
-5. ??
-6. Profit!
+2. Run `npm run dev` or `npm run build`
+3. Go to [Chrome's extensions page](chrome://extensions/)
+4. Click on "Load unpacked extension..." button
+5. Select the dist folder
+6. ??
+7. Profit!
