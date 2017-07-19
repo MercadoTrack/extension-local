@@ -13,7 +13,7 @@
             </button>
             <a class="title-wrapper" :href="item.permalink" target="_blank">
                 <span class="title" :title="item.title">
-                    <span class="price">{{ item.price | price }}</span> - {{ item.title | title }}
+                    <span v-bind:class="item.priceClass">{{ item.price | price }}</span> - {{ item.title | title }}
                 </span>
             </a>
             <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show indigo" type="button">

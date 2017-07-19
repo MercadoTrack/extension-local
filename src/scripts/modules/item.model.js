@@ -9,6 +9,7 @@ export default class Item {
         this.title = title;
         this.history = parseHistory({ history, price });
         this.price = this.history[this.history.length - 1].price
+        this.priceClass = getPriceClass({ history, price });
     }
 
     static fetch(id) {
@@ -28,16 +29,40 @@ export default class Item {
 
 }
 
+function getLatestHistory(history) {
+    if (!history) return null;
+    return history[history.length - 1];
+}
+
 function parseHistory({ history, price }) {
     const date = Utils.formatDate()
-    if (!history) return [{ price, date }];
-    const latest = history[history.length - 1];
-    if (!latest || latest.price != price || latest.date != date) {
+    const latest = getLatestHistory(history);
+
+    if (!latest) return [{ price, date }];
+
+    if (latest.price != price || latest.date != date) {
         return [...history, { price, date }];
     }
+
     return history;
 }
 
+function getPriceClass() {
+    const latest = getLatestHistory(history);
+
+    const samePrice = !latest || latest.price == price;
+    const betterPrice = !samePrice && checkBetterPrice(history, price);
+
+    return { 'price': samePrice, 'better-price': betterPrice, 'worse-price': !samePrice && !betterPrice  };
+}
+
+function checkBetterPrice({ history, price} ) {    
+      const latest = getLatestHistory(history);
+      if (!latest) return false;
+
+      return price > latest.price;
+}
+ 
 function pipeResponse(response) {
     if (!response.ok) {
         throw Error(response.statusText);

@@ -1,4 +1,6 @@
 $border-size: 1px
+$worse-price: #b90707
+$better-price: green
 
 body
     text-align: center
@@ -36,7 +38,13 @@ body
         font-size: 14px
         flex-grow: 2
         .price
-            color: green
+            font-weight: 500;
+        .better-price
+            color: $better-price;
+            font-weight: 700;
+        .worse-price
+            color: $worse-price;
+            font-weight: 700;
     .btn-show
         margin-left: auto
         width: 60px
