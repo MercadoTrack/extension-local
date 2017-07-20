@@ -12,9 +12,9 @@ _Chrome plugin to track products in MercadoLibre Argentina and visualize their p
 
 + **Feel free to open issues or send pull requests for improvements/suggestions/bugs.**
 
-Manual Installation && Dev setup: 
+#### Manual Installation & Dev setup: 
 
-*Prerequisites*: Git and Node LTS+
+0. *Prerequisites* - Git and NodeJS LTS+
 1. Clone the project
 2. Run `npm i` to install npm dependencies
 2.1. Run `npm run start` or `npm run build` to bundle for develop or build for production respectively
