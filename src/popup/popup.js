@@ -39,6 +39,16 @@ new Vue({
         toggleHistory(item) {
             store.dispatch('TOGGLE_HISTORY', item.id)
         },
+        parseTrend(item) {
+            return item.history.map((hist, index) => {
+                const fluctuation = item.getIndexedHistoryFluctuation(index)
+                return Object.assign({}, hist, {
+                    isTrendingUp: fluctuation > 0,
+                    isTrendingDown: fluctuation < 0,
+                    noTrend: !fluctuation
+                })
+            })
+        },
         isShowingHistory(item) {
             return store.state.showing.includes(item.id)
         }
