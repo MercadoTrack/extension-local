@@ -22,9 +22,12 @@
             </button>
             <div class="extra-info" v-if="isShowingHistory(item)">
                 <ul class="history">
-                    <li class="history-item collection" v-for="historyPrice in item.history">
+                    <li class="history-item collection" v-for="historyPrice in parseTrend(item)">
+                        <span v-if="historyPrice.isTrendingUp" class="material-icons trend-up">arrow_upwards</span>
+                        <span v-if="historyPrice.isTrendingDown" class="material-icons trend-down">arrow_downwards</span>
+                        <span v-if="historyPrice.noTrend" class="material-icons no-trend">remove</span>
                         <span class="date">{{ historyPrice.date }}: </span>
-                        <span>{{ historyPrice.price | price}}</span>
+                        <span>{{ historyPrice.price | price }}</span>
                     </li>
                 </ul>
             </div>

@@ -49,9 +49,24 @@ body
         padding-top: 10px
         .history
             margin: 0
+            display: flex
+            /* to display the latter prices first */
+            flex-direction: column-reverse
             .history-item
                 padding: 5px 10px
                 margin: 0 0 -#{$border-size} 0
+                .material-icons 
+                    max-width: 24px
+                    &.trend-up
+                        color: red
+                    &.trend-down
+                        color: green
+                    &.no-trend
+                        color: lightgray
                 .date
                     margin-right: auto
                     padding: 0px 10px 0px 0px
+                .lower
+                    color: #98FB98
+                .higher
+                    color: red

@@ -22,6 +22,19 @@ export default class Item {
         this.price = this.history[this.history.length - 1].price
     }
 
+    /* returns 
+    0 for same price 
+    +1 for price increased 
+    -1 for price lowered */
+    getIndexedHistoryFluctuation(index) {
+        if (index <= 0) return 0
+        const indexedPrice = this.history[index].price
+        const priceBefore = this.history[index - 1].price
+        return indexedPrice !== priceBefore
+            ? indexedPrice > priceBefore ? 1 : -1
+            : 0
+    }
+
     get endpoint() {
         return createEndpoint(this.id);
     }
