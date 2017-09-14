@@ -12,14 +12,14 @@ _Chrome plugin to track products in MercadoLibre Argentina and visualize their p
 
 + **Feel free to open issues or send pull requests for improvements/suggestions/bugs.**
 
+- - - -
+
 #### Manual Installation & Dev setup: 
 
 0. *Prerequisites* - Git and NodeJS LTS+
 1. Clone the project
 2. Run `npm i` to install npm dependencies
-2.1. Run `npm run start` or `npm run build` to bundle for develop or build for production respectively
+    1. Run `npm run start` or `npm run build` to bundle for continuous development or build for production respectively
 3. Go to [Chrome's extensions page](chrome://extensions/)
 4. Click on "Load unpacked extension..." button
 5. Select the dist folder
-6. ??
-7. Profit!
