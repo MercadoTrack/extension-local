@@ -1,17 +1,18 @@
-$border-size: 1px
+$simple-border-size: 1px
+$color-indigo: #3f51b5
+$complete-width: 500px
+$items-container-height: 500px
 
-body
+body,
+html
+    height: auto
     text-align: center
-    min-width: 500px
+    min-width: $complete-width
     min-height: 200px
 
 .material-icons, 
 .btn-text 
     vertical-align: middle
-
-#container
-    width: 90%
-    margin: auto
 
 .hidden
     display: none !important
@@ -19,54 +20,61 @@ body
 .size-and-clear
     padding: 10px 0
 
-.item
-    border-bottom: $border-size solid lightgray
-    padding: 10px 0
-    margin: 0 10px
-    align-items: center
-    display: flex
-    flex-wrap: wrap
-
-    .remove-item-btn
-        margin-right: auto
-        .material-icons
-            color: black
-    .title-wrapper
-        color: #333
-        font-size: 14px
-        flex-grow: 2
-        .price
-            color: green
-    .btn-show
-        margin-left: auto
-        width: 60px
-        padding: 0px
-        cursor: pointer
-        font-size: 18px
-    .extra-info
-        margin: auto
-        font-size: 13px
-        padding-top: 10px
-        .history
-            margin: 0
-            display: flex
-            /* to display the latter prices first */
-            flex-direction: column-reverse
-            .history-item
-                padding: 5px 10px
-                margin: 0 0 -#{$border-size} 0
-                .material-icons 
-                    max-width: 24px
-                    &.trend-up
+.items-container
+    height: $items-container-height
+    max-height: $items-container-height
+    overflow: auto
+    padding-bottom: 25px
+    box-shadow: 0 1px 5px rgba($color-indigo, 0.3)
+    .item
+        border-bottom: $simple-border-size solid lightgray
+        padding: 10px 0
+        margin: 0 10px
+        align-items: center
+        display: flex
+        flex-wrap: wrap
+        &:last-child 
+            border-bottom: none
+        .remove-item-btn
+            margin-right: auto
+            .material-icons
+                color: black
+        .title-wrapper
+            color: #333
+            font-size: 14px
+            flex-grow: 2
+            .price
+                color: green
+        .btn-show
+            margin-left: auto
+            width: 60px
+            padding: 0px
+            cursor: pointer
+            font-size: 18px
+        .extra-info
+            margin: auto
+            font-size: 13px
+            padding-top: 10px
+            .history
+                margin: 0
+                display: flex
+                /* to display the latter prices first */
+                flex-direction: column-reverse
+                .history-item
+                    padding: 5px 10px
+                    margin: 0 0 -#{$simple-border-size} 0
+                    .material-icons 
+                        max-width: 24px
+                        &.trend-up
+                            color: red
+                        &.trend-down
+                            color: green
+                        &.no-trend
+                            color: lightgray
+                    .date
+                        margin-right: auto
+                        padding: 0px 10px 0px 0px
+                    .lower
+                        color: #98FB98
+                    .higher
                         color: red
-                    &.trend-down
-                        color: green
-                    &.no-trend
-                        color: lightgray
-                .date
-                    margin-right: auto
-                    padding: 0px 10px 0px 0px
-                .lower
-                    color: #98FB98
-                .higher
-                    color: red
