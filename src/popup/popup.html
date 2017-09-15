@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,29 +8,31 @@
 
 <body>
     <div id="app">
-        <div v-for="item in items" class="item">
-            <button @click="remove(item)" class="remove-item-btn btn waves-effect waves-light yellow">
+        <div class="items-container" v-if="items.length">
+            <div v-for="item in items" class="item">
+                <button @click="remove(item)" class="remove-item-btn btn waves-effect waves-light yellow">
                 <i class="material-icons">delete</i>
             </button>
-            <a class="title-wrapper" :href="item.permalink" target="_blank">
+                <a class="title-wrapper" :href="item.permalink" target="_blank">
                 <span class="title" :title="item.title">
                     <span class="price">{{ item.price | price }}</span> - {{ item.title | title }}
                 </span>
             </a>
-            <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show indigo" type="button">
+                <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show indigo" type="button">
                 <i v-if="isShowingHistory(item)" class="material-icons">keyboard_arrow_up</i>
                 <i v-else class="material-icons">keyboard_arrow_down</i>
             </button>
-            <div class="extra-info" v-if="isShowingHistory(item)">
-                <ul class="history">
-                    <li class="history-item collection" v-for="historyPrice in parseTrend(item)">
-                        <span v-if="historyPrice.isTrendingUp" class="material-icons trend-up">arrow_upwards</span>
-                        <span v-if="historyPrice.isTrendingDown" class="material-icons trend-down">arrow_downwards</span>
-                        <span v-if="historyPrice.noTrend" class="material-icons no-trend">remove</span>
-                        <span class="date">{{ historyPrice.date }}: </span>
-                        <span>{{ historyPrice.price | price }}</span>
-                    </li>
-                </ul>
+                <div class="extra-info" v-if="isShowingHistory(item)">
+                    <ul class="history">
+                        <li class="history-item collection" v-for="historyPrice in parseTrend(item)">
+                            <span v-if="historyPrice.isTrendingUp" class="material-icons trend-up">arrow_upwards</span>
+                            <span v-if="historyPrice.isTrendingDown" class="material-icons trend-down">arrow_downwards</span>
+                            <span v-if="historyPrice.noTrend" class="material-icons no-trend">remove</span>
+                            <span class="date">{{ historyPrice.date }}: </span>
+                            <span>{{ historyPrice.price | price }}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="size-and-clear">
