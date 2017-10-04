@@ -4,6 +4,7 @@ export default class Item {
 
     constructor({ id, history, price, thumbnail, title, permalink }) {
         this.id = id.replace(/\D/g, '');
+        this.market = id.replace(/[0-9]/g, '');
         this.permalink = permalink;
         this.thumbnail = thumbnail;
         this.title = title;
@@ -11,8 +12,8 @@ export default class Item {
         this.price = this.history[this.history.length - 1].price
     }
 
-    static fetch(id) {
-        return fetch(createEndpoint(id))
+    static fetch(marketId, id) {
+        return fetch(createEndpoint(marketId, id))
             .then(pipeResponse)
             .then(res => res.json())
     }
@@ -36,7 +37,7 @@ export default class Item {
     }
 
     get endpoint() {
-        return createEndpoint(this.id);
+        return createEndpoint(this.market, this.id);
     }
 
 }
@@ -56,8 +57,8 @@ function pipeResponse(response) {
         throw Error(response.statusText);
     }
     return response;
-};
+}
 
-function createEndpoint(id) {
-    return `https://api.mercadolibre.com/items/MLA${id}`;
+function createEndpoint(marketId = '/MLA', id) {
+    return `https://api.mercadolibre.com/items${marketId}${id}`;
 }
