@@ -6,7 +6,7 @@ Storage.get()
     .catch(console.log)
 
 function update(item) {
-    return Item.fetch(item.id)
+    return Item.fetch(item.market, item.id)
         .then(data => item.addHistory(data))
         .then(() => saveItem(item))
 }

@@ -26,7 +26,25 @@
                 "scripts/content.bundle.js"
             ],
             "matches": [
-                "*://articulo.mercadolibre.com.ar/*"
+                "*://articulo.mercadolibre.com.ar/*",
+                "*://articulo.mercadolibre.com.ve/*",
+                "*://articulo.mercadolibre.com.bo/*",
+                "*://articulo.mercadolibre.com.cl/*",
+                "*://articulo.mercadolibre.com.co/*",
+                "*://articulo.mercadolibre.com.cr/*",
+                "*://articulo.mercadolibre.com.do/*",
+                "*://articulo.mercadolibre.com.ec/*",
+                "*://articulo.mercadolibre.com.gt/*",
+                "*://articulo.mercadolibre.com.hn/*",
+                "*://articulo.mercadolibre.com.mx/*",
+                "*://articulo.mercadolibre.com.ni/*",
+                "*://articulo.mercadolibre.com.pa/*",
+                "*://articulo.mercadolibre.com.py/*",
+                "*://articulo.mercadolibre.com.pe/*",
+                "*://articulo.mercadolibre.com.sv/*",
+                "*://articulo.mercadolibre.com.uy/*",
+                "*://produto.mercadolivre.com.br/*",
+                "*://anuncio.mercadolivre.pt/*"
             ],
             "run_at": "document_end"
         }

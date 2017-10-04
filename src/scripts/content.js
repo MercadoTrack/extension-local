@@ -4,6 +4,7 @@ import Graph from './modules/graph'
 import DomUtils from './modules/utils/dom.utils'
 
 const itemId = window.location.pathname.split('-')[1];
+const marketId = window.location.pathname.split('-')[0];
 const $chartSiblin = DomUtils.getChartSiblin();
 
 Storage.get(itemId)
@@ -13,7 +14,7 @@ Storage.get(itemId)
 /* item was being tracked */
 function handleSuccess(result) {
     let item = new Item(result[itemId]);
-    Item.fetch(itemId).then(data => {
+    Item.fetch(marketId, itemId).then(data => {
         item.addHistory(data)
         saveAndGraph(item)
     })
@@ -27,7 +28,7 @@ function handleFail() {
 }
 
 function trackBtnAction() {
-    Item.fetch(itemId).then(data => {
+    Item.fetch(marketId, itemId).then(data => {
         const container = this.parentNode
         /* calm down with those clicks */
         if(!container.parentNode) return
