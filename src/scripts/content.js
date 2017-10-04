@@ -3,8 +3,7 @@ import Storage from './modules/storage'
 import Graph from './modules/graph'
 import DomUtils from './modules/utils/dom.utils'
 
-const itemId = window.location.pathname.split('-')[1];
-const marketId = window.location.pathname.split('-')[0];
+const [ marketId, itemId ] = window.location.pathname.split('-');
 const $chartSiblin = DomUtils.getChartSiblin();
 
 Storage.get(itemId)
