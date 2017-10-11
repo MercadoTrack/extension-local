@@ -11,15 +11,10 @@
 _Chrome plugin to track products in MercadoLibre Argentina and visualize their price over time_
 
 + **Feel free to open issues or send pull requests for improvements/suggestions/bugs.**
+---
 
-- - - -
+_Visual design: Alfredo Vázquez_
 
-#### Manual Installation & Dev setup: 
+---
 
-0. *Prerequisites* - Git and NodeJS LTS+
-1. Clone the project
-2. Run `npm i` to install npm dependencies
-    1. Run `npm run start` or `npm run build` to bundle for continuous development or build for production respectively
-3. Go to [Chrome's extensions page](chrome://extensions/)
-4. Click on "Load unpacked extension..." button
-5. Select the dist folder
+_Check the [wiki](https://github.com/GMaiolo/mercado-track/wiki/Manual-Installation-&-Dev-setup) for technical information and environment setup steps._
