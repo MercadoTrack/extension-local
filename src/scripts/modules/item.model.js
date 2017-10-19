@@ -59,6 +59,7 @@ function pipeResponse(response) {
     return response;
 }
 
-function createEndpoint(marketId = '/MLA', id) {
-    return `https://api.mercadolibre.com/items${marketId}${id}`;
+function createEndpoint(marketId, id) {
+    const defaultMarket = '/MLA';
+    return `https://api.mercadolibre.com/items${marketId || defaultMarket}${id}`;
 }
