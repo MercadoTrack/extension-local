@@ -2,9 +2,16 @@ import Utils from './utils/utils'
 
 export default class Item {
 
-    constructor({ id, history, price, thumbnail, title, permalink }) {
+    /* id may be numbers only (when item is coming from localStorage/URL) 
+    or "/MMM99999999" format when it's coming from the API
+    we need documentation but I regret nothing */
+    constructor({ id, history, price, thumbnail, title, permalink, market }) {
         this.id = id.replace(/\D/g, '');
-        this.market = id.replace(/[0-9]/g, '');
+        /* market param (format: MMM) will be set whenever the item is 
+        being created from localStorage/URL
+        otherwise it's coming from the API
+        which then will have the following format: /MMM99999999 */
+        this.market = market || id.replace(/[\/\d]/g, '');
         this.permalink = permalink;
         this.thumbnail = thumbnail;
         this.title = title;
@@ -60,6 +67,6 @@ function pipeResponse(response) {
 }
 
 function createEndpoint(marketId, id) {
-    const defaultMarket = '/MLA';
-    return `https://api.mercadolibre.com/items${marketId || defaultMarket}${id}`;
+    const defaultMarket = 'MLA';
+    return `https://api.mercadolibre.com/items/${marketId || defaultMarket}${id}`;
 }
