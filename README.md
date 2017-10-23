@@ -13,8 +13,8 @@ _Chrome plugin to track products in MercadoLibre Argentina and visualize their p
 + **Feel free to open issues or send pull requests for improvements/suggestions/bugs.**
 ---
 
-_Visual design: Alfredo Vázquez_
+_Check the [wiki](https://github.com/GMaiolo/mercado-track/wiki/Manual-Installation-&-Dev-setup) for technical information and environment setup steps._
 
 ---
 
-_Check the [wiki](https://github.com/GMaiolo/mercado-track/wiki/Manual-Installation-&-Dev-setup) for technical information and environment setup steps._
+_Visual design: Alfredo Vázquez_
