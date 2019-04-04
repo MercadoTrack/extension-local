@@ -68,5 +68,5 @@ function pipeResponse(response) {
 
 function createEndpoint(marketId, id) {
     const defaultMarket = 'MLA';
-    return `https://api.mercadolibre.com/items/${marketId || defaultMarket}${id}`;
+    return `https://api.mercadotrack.com/articles/ml/${marketId || defaultMarket}${id}`;
 }
