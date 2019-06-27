@@ -24,6 +24,8 @@ function handleFail() {
     let { container, trackBtn } = DomUtils.createTrackBtn()
     trackBtn.addEventListener('click', trackBtnAction)
     $chartSiblin.parentNode.insertBefore(container, $chartSiblin)
+    const mtLink = DomUtils.createGoToMTLink(marketId, itemId)
+    container.appendChild(mtLink)
 }
 
 function trackBtnAction() {
@@ -40,7 +42,7 @@ function trackBtnAction() {
 function saveAndGraph(item) {
     if (!item) throw `No item fetched with id ${itemId}`;
     return Storage.saveItem(item)
-        .then(() => Graph.show(item, $chartSiblin))
+        .then(() => Graph.show({ item, elem: $chartSiblin, itemId, marketId }))
 }
 
 function getIdsFromUrl(url) {

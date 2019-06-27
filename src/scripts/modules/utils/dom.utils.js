@@ -21,13 +21,23 @@ export default {
         const canvas = container.querySelector('#mt-canvas')
         const toggleBtn = container.querySelector('#mt-toggle')
         addToggleBtnBehavior(toggleBtn, canvas, itemsCount)
-        return { canvas, container }
+        return { canvas, toggleBtn, container }
     },
 
     createTrackBtn() {
         const container = htmlToElement(trackBtnHtml)
         const trackBtn = container.querySelector('#mt-track')
         return { container, trackBtn }
+    },
+
+    createGoToMTLink(marketId, itemId) {
+        const link = document.createElement('a')
+        const linkText = document.createTextNode('Ver en MercadoTrack')
+        link.setAttribute('href', `https://mercadotrack.com/articulo/${marketId}${itemId}`)
+        link.setAttribute('style', 'margin: auto 15px;')
+        link.setAttribute('target', '_blank')
+        link.appendChild(linkText)
+        return link
     }
 
 }

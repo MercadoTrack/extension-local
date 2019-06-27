@@ -11,9 +11,11 @@ const defaults = {
 Object.assign(Chart.defaults.global, defaults);
 
 export default {
-    show(item, $elem) {
-        let { container, canvas } = DomUtils.initDOM(item.history.length);
-        $elem.parentNode.insertBefore(container, $elem);
+    show({ item, elem, marketId, itemId }) {
+        let { container, canvas, toggleBtn } = DomUtils.initDOM(item.history.length);
+        const mtLink = DomUtils.createGoToMTLink(marketId, itemId);
+        toggleBtn.parentNode.appendChild(mtLink);
+        elem.parentNode.insertBefore(container, elem);
         return new Chart(canvas, Utils.getItemChartOptions(item));
     }
 }
