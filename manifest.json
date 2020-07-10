@@ -3,22 +3,13 @@
     "manifest_version": 2,
     "name": "MercadoTrack",
     "description": "MercadoTrack",
-    "version": "0.6.0",
-    "permissions": [
-        "storage",
-        "unlimitedStorage"
-    ],
+    "version": "1.0.0",
     "icons": {
         "128": "images/icon_128.png"
     },
     "browser_action": {
         "default_title": "MercadoTrack",
         "default_popup": "popup.html"
-    },
-    "background": {
-        "scripts": [
-            "scripts/background.bundle.js"
-        ]
     },
     "content_scripts": [
         {

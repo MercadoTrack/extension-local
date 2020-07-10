@@ -12,7 +12,6 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         content: `${paths.src}/scripts/content.js`,
-        background: `${paths.src}/scripts/background.js`,
         popup: `${paths.src}/popup/popup.js`
     },
     output: {
