@@ -12,6 +12,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         content: `${paths.src}/scripts/content.js`,
+        background: `${paths.src}/scripts/background.js`,
         popup: `${paths.src}/popup/popup.js`
     },
     output: {
@@ -25,6 +26,8 @@ module.exports = {
             { from: './images', to: `${paths.dist}/images` },
             { from: './manifest.json', to: paths.dist },
             { from: './LICENSE', to: paths.dist },
+            { from: `${paths.src}/scripts/env.js`, to: `${paths.dist}/scripts` },
+            { from: './vendor/auth0chrome.min.js', to: `${paths.dist}/scripts/vendor` }
         ])
     ],
     module: {
@@ -64,6 +67,11 @@ module.exports = {
                         parserOptions: {
                             sourceType: 'module'
                         },
+                        globals: [
+                            "chrome",
+                            "Auth0Chrome",
+                            "env"
+                        ],
                         rules: {
                             'quotes': ['error', 'single'],
                             'no-irregular-whitespace': ['error'],

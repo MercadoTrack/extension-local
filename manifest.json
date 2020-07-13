@@ -11,6 +11,14 @@
         "default_title": "MercadoTrack",
         "default_popup": "popup.html"
     },
+    "permissions": [
+        "identity",
+        "notifications"
+    ],
+    "background": {
+        "scripts": ["scripts/env.js", "scripts/vendor/auth0chrome.min.js", "scripts/background.bundle.js"],
+        "persistent": false
+    },
     "content_scripts": [
         {
             "js": [
