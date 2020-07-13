@@ -69,12 +69,15 @@ function createTrackBtn() {
       <a
         id="mercadotrack-btn"
         class="ui-button ui-button--primary"
-        style="margin: 15px;"
+        style="margin: 15px; display: flex; align-items: center;"
         target="_blank"
         rel="noopener noreferrer"
         href="${href}"
       >
-        Seguir este articulo con Mercadotrack
+        <figure style="margin-right: 0.75rem; height: 2.5rem; width: 2.5rem;">
+          <img src="https://mercadotrack.com/img/mtrack_icon.f52cac11.svg" >
+        </figure>
+        <span>Seguir este articulo con Mercadotrack</span>
       </a>
     </div>`
     )
@@ -98,11 +101,17 @@ function addToggleBtnBehavior(toggleBtn, canvas, itemsCount) {
 }
 
 function createGoToMTLink(marketId, itemId) {
-  const link = document.createElement('a')
-  const linkText = document.createTextNode('Ver en MercadoTrack')
-  link.setAttribute('href', `https://mercadotrack.com/articulo/${marketId}${itemId}`)
-  link.setAttribute('style', 'margin: auto 15px;')
-  link.setAttribute('target', '_blank')
-  link.appendChild(linkText)
-  return link
+  return htmlToElement(
+    `<a
+      href="https://mercadotrack.com/articulo/${marketId}${itemId}"
+      style="margin: auto 15px; font-size: 18px; display: flex;"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span>Ver en MercadoTrack</span>
+      <figure style="margin-left: 0.5rem; height: 2.25rem; width: 2.25rem;">
+        <img src="https://mercadotrack.com/img/mtrack_icon.f52cac11.svg" >
+      </figure>
+    </a>`
+  )
 }
