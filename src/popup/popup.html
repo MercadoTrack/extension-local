@@ -1,48 +1,115 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <!-- TODO: remove CDN and wrap in bundle -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div v-if="loading" style="margin-top: 2rem;">Cargando...</div>
-        <div v-else>
-            <div>
-                <button @click="login" v-if="!auth" class="login-btn btn waves-effect waves-light btn-show indigo" type="button">Iniciar sesion</button>
-                <!-- algo para mientras esta iniciando sesion? -->
+      <div v-if="authenticating" style="margin-top: 2rem; font-size: 1rem; font-weight: 500;">
+        <i class="material-icons loading-spinner" style="color: #3f51b5;">sync</i>
+        Esperando inicio de sesion...
+      </div>
+      <div v-if="!authenticating && !auth">
+        <button
+          @click="login"
+          class="login-btn btn waves-effect waves-light btn-show indigo"
+          style="height: auto; display: flex; align-items: center; font-weight: 500; font-size: 14px;"
+          type="button"
+        >
+        <span style="margin-right: 0.5rem;">Inicia sesion con tu cuenta de</span>
+        <img src="../images/icon_128.png" alt="Mercadotrack logo" style="height: 3rem;">
+        </button>
+      </div>
+      <div v-if="auth && user" style="padding: 1rem 2rem; display: flex; align-items: center; border-bottom: 1px solid lightgray; margin-bottom: 1rem;">
+        <a href="https://mercadotrack.com" style="margin-right: auto; display: flex; align-items: center;" target="_blank" rel="noreferrer noopener">
+          <img src="../images/icon_128.png" alt="Mercadotrack logo" style="height: 50px; width: 50px;">
+          <span style="
+            font-size: 1.25rem;
+            margin-left: 0.75rem;
+            font-weight: 500;
+            color: black;
+          ">Mercadotrack</span>
+        </a>
+        <h1 style="font-size: 1.25rem; font-weight: 500; margin: auto 0;">
+          <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
+          <span v-else>{{ user.email }}</span>
+        </h1>
+      </div>
+      <div v-if="loading" style="margin-top: 2rem; font-size: 1rem; font-weight: 500;">
+        <i class="material-icons loading-spinner" style="color: #3f51b5;">sync</i>
+        Cargando tus articulos favoritos...
+      </div>
+      <div v-else>
+        <div class="items-container" v-if="auth && articles.length">
+          <p style="
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            margin-left: 2rem;
+          ">Estos son tus articulos trackeados:</p>
+          <div v-for="article in articles" class="item">
+            <div class="top-container">
+              <a
+                class="title-wrapper"
+                :href="getArticleLink(article)"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="title" :title="article.title">
+                  <span class="price">{{ article.price | price }}</span> - {{
+                  article.title | title }}
+                </span>
+              </a>
+              <div
+                @click="toggleArticle(article)"
+                style="cursor: pointer;"
+              >
+                <i v-if="isUnfolded(article)" class="material-icons"
+                  >keyboard_arrow_up</i
+                >
+                <i v-else class="material-icons">keyboard_arrow_down</i>
+              </div>
             </div>
-            <div class="items-container" v-if="articles.length">
-                <div v-for="article in articles" class="item">
-                    <a class="title-wrapper" :href="article.permalink" target="_blank" rel="noreferrer noopener">
-                        <span class="title" :title="article.title">
-                            <span class="price">{{ article.price | price }}</span> - {{ article.title | title }}
-                        </span>
-                    </a>
-                    <button @click="toggleArticle(article)" class="btn waves-effect waves-light btn-show indigo" type="button">
-                        <i v-if="isUnfolded(article)" class="material-icons">keyboard_arrow_up</i>
-                        <i v-else class="material-icons">keyboard_arrow_down</i>
-                    </button>
-                    <div class="extra-info" v-if="isUnfolded(article)">
-                        <ul class="history">
-                            <li class="history-item collection" v-for="snapshot in article.history">
-                                <span v-if="!snapshot.fluctuation" class="material-icons no-trend">remove</span>
-                                <span v-if="snapshot.fluctuation > 0" class="material-icons trend-up">arrow_upwards</span>
-                                <span v-if="snapshot.fluctuation < 0" class="material-icons trend-down">arrow_downwards</span>
-                                <span class="date">{{ snapshot.date }}: </span>
-                                <span>{{ snapshot.price | price }}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="extra-info" v-if="isUnfolded(article)">
+              <ul class="history">
+                <li
+                  class="history-item collection"
+                  v-for="snapshot in article.history"
+                >
+                  <span
+                    v-if="snapshot.fluctuation === 0"
+                    class="material-icons no-trend"
+                    >remove</span
+                  >
+                  <span
+                    v-if="snapshot.fluctuation > 0"
+                    class="material-icons trend-up"
+                    >arrow_upwards</span
+                  >
+                  <span
+                    v-if="snapshot.fluctuation < 0"
+                    class="material-icons trend-down"
+                    >arrow_downwards</span
+                  >
+                  <span class="date">{{ snapshot.date }}: </span>
+                  <span>{{ snapshot.price | price }}</span>
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script type="text/javascript" src="./scripts/popup.bundle.js"></script>
-</body>
-
+  </body>
 </html>

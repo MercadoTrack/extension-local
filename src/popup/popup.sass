@@ -1,4 +1,3 @@
-$simple-border-size: 1px
 $color-indigo: #3f51b5
 $complete-width: 500px
 $items-container-height: 500px
@@ -14,67 +13,71 @@ html
 .btn-text 
     vertical-align: middle
 
-.hidden
-    display: none !important
-
-.size-and-clear
-    padding: 10px 0
-
 .login-btn
     margin: 2rem auto;
 
 .items-container
-    height: $items-container-height
-    max-height: $items-container-height
     overflow: auto
     padding-bottom: 25px
-    box-shadow: 0 1px 5px rgba($color-indigo, 0.3)
-    .item
-        border-bottom: $simple-border-size solid lightgray
-        padding: 10px 0
-        margin: 0 10px
-        align-items: center
+
+.loading-spinner
+    animation: spin 1s linear infinite
+
+.item
+    border-bottom: 1px solid lightgray
+    padding: 10px 0
+    margin: 0 10px
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+    &:last-child 
+        border-bottom: none
+    .top-container
         display: flex
-        flex-wrap: wrap
-        &:last-child 
-            border-bottom: none
-        .title-wrapper
-            color: #333
-            font-size: 14px
-            flex-grow: 2
-            .price
-                color: green
-        .btn-show
-            margin-left: auto
-            width: 60px
-            padding: 0px
-            cursor: pointer
-            font-size: 18px
-        .extra-info
-            margin: auto
-            font-size: 13px
-            padding-top: 10px
-            .history
-                margin: 0
-                display: flex
-                /* to display the latter prices first */
-                flex-direction: column-reverse
-                .history-item
-                    text-align: left
-                    padding: 5px 10px
-                    margin: 0 0 -#{$simple-border-size} 0
-                    .material-icons 
-                        max-width: 24px
-                        &.trend-up
-                            color: red
-                        &.trend-down
-                            color: green
-                        &.no-trend
-                            color: lightgray
-                    .date
-                        margin-right: auto
-                        padding: 0px 10px 0px 0px
-                    .lower
-                        color: #98FB98
-                    .higher
-                        color: red
+        align-items: center
+        justify-content: center
+        width: 100%
+    .title-wrapper
+        color: #333
+        font-size: 14px
+        flex-grow: 2
+        .price
+            color: green
+    .btn-show
+        margin-left: auto
+        width: 60px
+        padding: 0px
+        cursor: pointer
+        font-size: 18px
+
+.extra-info
+    margin: auto
+    font-size: 13px
+    padding-top: 10px
+    .history
+        margin: 0
+        display: flex
+        flex-direction: column-reverse
+        .history-item
+            text-align: left
+            padding: 5px 10px
+            margin: 0 0 -#{1px} 0
+            .material-icons 
+                max-width: 24px
+                &.trend-up
+                    color: red
+                &.trend-down
+                    color: green
+                &.no-trend
+                    color: lightgray
+            .date
+                margin-right: auto
+                padding: 0px 10px 0px 0px
+            .lower
+                color: #98FB98
+            .higher
+                color: red
+
+@keyframes spin
+    100%
+        transform: rotate(360deg)
