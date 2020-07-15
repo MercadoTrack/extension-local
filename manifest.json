@@ -1,53 +1,50 @@
 {
-    "author": "Guillermo Maiolo",
-    "manifest_version": 2,
-    "name": "MercadoTrack",
-    "description": "MercadoTrack",
-    "version": "1.0.0",
-    "icons": {
-        "128": "images/icon_128.png"
-    },
-    "browser_action": {
-        "default_title": "MercadoTrack",
-        "default_popup": "popup.html"
-    },
-    "permissions": [
-        "identity",
-        "notifications",
-        "storage",
-        "downloads"
+  "author": "Guillermo Maiolo",
+  "manifest_version": 2,
+  "name": "MercadoTrack",
+  "description": "MercadoTrack",
+  "version": "1.0.0",
+  "icons": {
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "MercadoTrack",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["identity", "notifications", "storage", "downloads"],
+  "background": {
+    "scripts": [
+      "scripts/env.js",
+      "scripts/vendor/auth0chrome.min.js",
+      "scripts/background.bundle.js"
     ],
-    "background": {
-        "scripts": ["scripts/env.js", "scripts/vendor/auth0chrome.min.js", "scripts/background.bundle.js"],
-        "persistent": false
-    },
-    "content_scripts": [
-        {
-            "js": [
-                "scripts/content.bundle.js"
-            ],
-            "matches": [
-                "*://articulo.mercadolibre.com.ar/*",
-                "*://articulo.mercadolibre.com.ve/*",
-                "*://articulo.mercadolibre.com.bo/*",
-                "*://articulo.mercadolibre.cl/*",
-                "*://articulo.mercadolibre.com.co/*",
-                "*://articulo.mercadolibre.co.cr/*",
-                "*://articulo.mercadolibre.com.do/*",
-                "*://articulo.mercadolibre.com.ec/*",
-                "*://articulo.mercadolibre.com.gt/*",
-                "*://articulo.mercadolibre.com.hn/*",
-                "*://articulo.mercadolibre.com.mx/*",
-                "*://articulo.mercadolibre.com.ni/*",
-                "*://articulo.mercadolibre.com.pa/*",
-                "*://articulo.mercadolibre.com.py/*",
-                "*://articulo.mercadolibre.com.pe/*",
-                "*://articulo.mercadolibre.com.sv/*",
-                "*://articulo.mercadolibre.com.uy/*",
-                "*://produto.mercadolivre.com.br/*",
-                "*://anuncio.mercadolivre.pt/*"
-            ],
-            "run_at": "document_end"
-        }
-    ]
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.bundle.js"],
+      "matches": [
+        "*://articulo.mercadolibre.com.ar/*",
+        "*://articulo.mercadolibre.com.ve/*",
+        "*://articulo.mercadolibre.com.bo/*",
+        "*://articulo.mercadolibre.cl/*",
+        "*://articulo.mercadolibre.com.co/*",
+        "*://articulo.mercadolibre.co.cr/*",
+        "*://articulo.mercadolibre.com.do/*",
+        "*://articulo.mercadolibre.com.ec/*",
+        "*://articulo.mercadolibre.com.gt/*",
+        "*://articulo.mercadolibre.com.hn/*",
+        "*://articulo.mercadolibre.com.mx/*",
+        "*://articulo.mercadolibre.com.ni/*",
+        "*://articulo.mercadolibre.com.pa/*",
+        "*://articulo.mercadolibre.com.py/*",
+        "*://articulo.mercadolibre.com.pe/*",
+        "*://articulo.mercadolibre.com.sv/*",
+        "*://articulo.mercadolibre.com.uy/*",
+        "*://produto.mercadolivre.com.br/*",
+        "*://anuncio.mercadolivre.pt/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }
