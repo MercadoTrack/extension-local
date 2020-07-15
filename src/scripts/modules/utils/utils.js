@@ -2,7 +2,7 @@ export default {
 
     /* e.g. $ 99.999,00 */
     formatMoney(value) {
-        const options = { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 };
+        const options = { style: 'currency', currency: 'ARS', minimumFractionDigits: 0, maximumFractionDigits: 0 };
         const numberFormat = new Intl.NumberFormat('es-AR', options);
         return numberFormat.format(value);
     },

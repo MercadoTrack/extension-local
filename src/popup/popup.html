@@ -8,70 +8,188 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
     />
+    <style lang="css">
+      html {
+        --base-color: rgb(63, 81, 181);
+        --base-color-darker: rgba(63, 81, 181, 0.5);
+        --app-height: 500px;
+        --app-width: 400px;
+        font-size: 16px;
+      }
+      .mt-blue-color {
+        color: var(--base-color);
+      }
+      a {
+        color: var(--base-color);
+      }
+      #app {
+        height: var(--app-height);
+        max-height: var(--app-height);
+        width: var(--app-width);
+        max-width: var(--app-width);
+      }
+      .material-icons {
+        vertical-align: middle;
+      }
+      button {
+        text-align: center;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        background-color: var(--base-color);
+        color: white;
+      }
+      button:focus {
+        background-color: var(--base-color-darker);
+      }
+      .last-border-0:last-child {
+        border-bottom: none;
+      }
+      .loading-spinner {
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <div id="app">
-      <div v-if="authenticating" style="margin-top: 2rem; font-size: 1rem; font-weight: 500;">
-        <i class="material-icons loading-spinner" style="color: #3f51b5;">sync</i>
+    <div id="app" class="overflow-auto py-2 px-4">
+      <!-- old data banner -->
+      <div v-if="hasOldData" class="text-center font-medium">
+        <h1 class="text-xs font-medium my-4 pb-4 border-b border-gray-300">
+          Tenias articulos trackeados de forma local en la version anterior de
+          la extension, estos datos ya no se utilizaran asi que podes
+          descargarlos haciendo click
+          <a role="button" @click="downloadOldData"
+            >aca <i class="material-icons text-xs">get_app</i></a
+          >
+          (formato JSON). Cualquier consulta pueden contactarnos por
+          <a
+            href="https://twitter.com/mercadotrack"
+            target="_blank"
+            rel="noopener noreferrer"
+            >twitter</a
+          >
+          o
+          <a
+            href="mailto:mercadotrack@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >correo electronico</a
+          >
+        </h1>
+        <div class="text-xs">
+          <a role="button" @click="clearOldData">
+            <p>
+              Ya lo descargue / No me interesan esos datos
+            </p>
+            <p>
+              <i class="material-icons text-sm text-orange-400">warning</i>
+              <span class="underline">
+                Advertencia: Hacer click aqui borrara los datos viejos y ya no
+                podran ser descargados
+              </span>
+            </p>
+          </a>
+        </div>
+      </div>
+      <!-- authenticating -->
+      <div v-if="authenticating" class="mt-24 text-sm font-medium text-center">
+        <i class="material-icons loading-spinner mt-blue-color">sync</i>
         Esperando inicio de sesion...
       </div>
-      <div v-if="!authenticating && !auth">
-        <button
-          @click="login"
-          class="login-btn btn waves-effect waves-light btn-show indigo"
-          style="height: auto; display: flex; align-items: center; font-weight: 500; font-size: 14px;"
-          type="button"
-        >
-        <span style="margin-right: 0.5rem;">Inicia sesion con tu cuenta de</span>
-        <img src="../images/icon_128.png" alt="Mercadotrack logo" style="height: 3rem;">
-        </button>
+      <!-- not logged in -->
+      <div
+        v-if="!authenticating && !auth"
+        class="flex items-center justify-center"
+        :class="{ 'h-full': !hasOldData, 'mt-24': hasOldData }"
+      >
+        <div class="font-medium text-base">
+          <p class="m-0 text-lg">Inicia sesion con tu</p>
+          <button
+            @click="login"
+            class="mt-2 mb-8 mx-auto flex items-center text-lg"
+            type="button"
+          >
+            cuenta de
+            <img
+              src="../images/icon_128.png"
+              alt="Mercadotrack logo"
+              class="h-8 ml-2"
+            />
+          </button>
+        </div>
       </div>
-      <div v-if="auth && user" style="padding: 1rem 2rem; display: flex; align-items: center; border-bottom: 1px solid lightgray; margin-bottom: 1rem;">
-        <a href="https://mercadotrack.com" style="margin-right: auto; display: flex; align-items: center;" target="_blank" rel="noreferrer noopener">
-          <img src="../images/icon_128.png" alt="Mercadotrack logo" style="height: 50px; width: 50px;">
-          <span style="
-            font-size: 1.25rem;
-            margin-left: 0.75rem;
-            font-weight: 500;
-            color: black;
-          ">Mercadotrack</span>
+      <!-- navbar (logged in) -->
+      <div
+        v-if="auth && user"
+        class="pb-2 flex items-center border-b border-gray-300"
+        :class="{ 'my-4': hasOldData, 'mb-4': !hasOldData }"
+      >
+        <a
+          href="https://mercadotrack.com"
+          class="mr-auto flex items-center"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            src="../images/icon_128.png"
+            alt="Mercadotrack logo"
+            class="h-8 w-8"
+          />
         </a>
-        <h1 style="font-size: 1.25rem; font-weight: 500; margin: auto 0;">
-          <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
+        <h1 class="text-base font-medium">
+          <span v-if="user.given_name"
+            >{{ user.given_name }} {{ user.family_name }}</span
+          >
           <span v-else>{{ user.email }}</span>
         </h1>
       </div>
-      <div v-if="loading" style="margin-top: 2rem; font-size: 1rem; font-weight: 500;">
-        <i class="material-icons loading-spinner" style="color: #3f51b5;">sync</i>
+      <!-- loading favorites -->
+      <div v-if="loading" class="mt-8 text-sm font-medium text-center">
+        <i class="material-icons loading-spinner mt-blue-color">sync</i>
         Cargando tus articulos favoritos...
       </div>
+      <!-- finished loading favorites -->
       <div v-else>
-        <div class="items-container" v-if="auth && articles.length">
-          <p style="
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: left;
-            margin-left: 2rem;
-          ">Estos son tus articulos trackeados:</p>
-          <div v-for="article in articles" class="item">
-            <div class="top-container">
+        <!-- favorites show -->
+        <div v-if="articles.length" class="mb-4">
+          <p class="text-sm font-medium text-left">
+            Estos son tus favoritos:
+          </p>
+          <div
+            v-for="article in articles"
+            class="border-b last-border-0 border-gray-300 py-2 flex items-center flex-wrap"
+          >
+            <div class="flex justify-center items-center w-full">
               <a
-                class="title-wrapper"
+                class="text-gray-700 text-sm text-left ml-2"
                 :href="getArticleLink(article)"
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <span class="title" :title="article.title">
-                  <span class="price">{{ article.price | price }}</span> - {{
-                  article.title | title }}
-                </span>
+                <div
+                  class="grid"
+                  style="grid-template-columns: auto 1fr;"
+                  :title="article.title"
+                >
+                  <div class="text-green-700 font-medium whitespace-no-wrap">
+                    {{ article.price | price }} &ndash;
+                  </div>
+                  <div class="mx-2 truncate w-full">
+                    {{ article.title }}
+                  </div>
+                </div>
               </a>
               <div
                 @click="toggleArticle(article)"
-                style="cursor: pointer;"
+                class="w-12 text-right"
+                role="button"
               >
                 <i v-if="isUnfolded(article)" class="material-icons"
                   >keyboard_arrow_up</i
@@ -79,32 +197,30 @@
                 <i v-else class="material-icons">keyboard_arrow_down</i>
               </div>
             </div>
-            <div class="extra-info" v-if="isUnfolded(article)">
-              <ul class="history">
+            <div class="m-auto text-xs" v-if="isUnfolded(article)">
+              <ul class="m-0 flex flex-col-reverse">
                 <li
-                  class="history-item collection"
                   v-for="snapshot in article.history"
+                  class="relative text-left my-1 flex"
                 >
-                  <span
-                    v-if="snapshot.fluctuation === 0"
-                    class="material-icons no-trend"
-                    >remove</span
-                  >
-                  <span
-                    v-if="snapshot.fluctuation > 0"
-                    class="material-icons trend-up"
-                    >arrow_upwards</span
-                  >
-                  <span
-                    v-if="snapshot.fluctuation < 0"
-                    class="material-icons trend-down"
-                    >arrow_downwards</span
-                  >
-                  <span class="date">{{ snapshot.date }}: </span>
-                  <span>{{ snapshot.price | price }}</span>
+                  <span class="mr-auto pr-3 font-medium"
+                    >{{ snapshot.date }}:
+                  </span>
+                  <span class="ml-auto">{{ snapshot.price | price }}</span>
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <!-- no favs or errors -->
+        <div v-else>
+          <div v-if="auth" class="py-4">
+            <h1 v-if="getArticlesError" class="text-base font-medium">
+              {{ getArticlesError }}
+            </h1>
+            <h1 v-else class="text-base font-medium">
+              Todavia no trackeas ningun articulo en Mercadotrack.
+            </h1>
           </div>
         </div>
       </div>

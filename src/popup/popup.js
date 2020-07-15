@@ -1,9 +1,7 @@
-import 'materialize-css';
-import './popup.sass';
 import Vue from 'vue';
 import axios from 'axios'
-import Utils from '../scripts/modules/utils/utils';
 import jwtDecode from 'jwt-decode'
+import Utils from '../scripts/modules/utils/utils';
 
 // "chrome-extension://dalhiaalbimlfakgphiamkjgaicfblen/popup.html"
 
@@ -20,7 +18,9 @@ new Vue({
     authenticating: false,
     loading: false,
     articles: [],
-    unfoldedArticle: null
+    getArticlesError: null,
+    unfoldedArticle: null,
+    hasOldData: false
   }),
   methods: {
     login() {
@@ -43,15 +43,21 @@ new Vue({
       }, 1000)
     },
     getArticles() {
-      return axios.get('https://api.mercadotrack.com/user/favorites?full=true', { headers: { Authorization: `Bearer ${this.auth.id_token}` } })
-      .then(({ data }) => {
-        this.articles = data
-        console.log(data)
-      })
-      .catch((err) => {
-        console.log(err.message)
-        throw err
-      })
+      const token = this.auth && this.auth.id_token
+      return axios.get('https://api.mercadotrack.com/user/favorites?full=true', { headers: { Authorization: `Bearer ${token}` } })
+        .then(({ data }) => {
+          this.articles = data
+          console.log(data)
+        })
+        .catch((err) => {
+          if (err.response.status == 403) {
+            localStorage.removeItem('authResult')
+            this.auth = null
+            console.log('Session expired')
+          } else {
+            this.getArticlesError = err
+          }
+        })
     },
     getArticleLink(article) {
       return `https://mercadotrack.com/articulo/${article.id}`
@@ -63,15 +69,38 @@ new Vue({
     },
     isUnfolded(article) {
       return this.unfoldedArticle === article.id
+    },
+    downloadOldData() {
+      chrome.storage.local.get(null, (items) => {
+        const str = JSON.stringify(items, null, 2)
+        chrome.downloads.download({
+          url: URL.createObjectURL(new Blob([ str ], {type: 'application/json'})),
+          filename: 'mercadotrack-legacy.json'
+        })
+      })
+    },
+    clearOldData() {
+      chrome.storage.local.clear(() => {
+        chrome.storage.local.get(null, (items) => {
+          this.hasOldData = Boolean(items && Object.keys(items).length)
+        });
+      })
     }
   },
-  created () {
-    if (this.auth) {
-      this.user = jwtDecode(this.auth.id_token)
+  created() {   
+    if (this.auth && this.auth.id_token) {
+      try {
+        this.user = jwtDecode(this.auth.id_token)
+      } catch (err) {
+        console.log(err)
+      }
       this.loading = true
       this.getArticles().finally(() => {
         this.loading = false
       })
     }
+    chrome.storage.local.get(null, (items) => {
+      this.hasOldData = Boolean(items && Object.keys(items).length)
+    });
   }
 })

@@ -13,7 +13,9 @@
     },
     "permissions": [
         "identity",
-        "notifications"
+        "notifications",
+        "storage",
+        "downloads"
     ],
     "background": {
         "scripts": ["scripts/env.js", "scripts/vendor/auth0chrome.min.js", "scripts/background.bundle.js"],
