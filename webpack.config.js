@@ -31,7 +31,7 @@ module.exports = {
       { from: "./LICENSE", to: paths.dist },
       { from: `${paths.src}/scripts/env.js`, to: `${paths.dist}/scripts` },
       {
-        from: "./vendor/**",
+        from: "./vendor",
         to: `${paths.dist}/scripts/vendor`,
       },
     ]),
