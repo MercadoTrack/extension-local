@@ -133,7 +133,7 @@
         <div v-for="article in articles"
           class="border-b last-border-0 border-gray-300 py-2 flex items-center flex-wrap">
           <div class="flex justify-center items-center w-full">
-            <a class="text-gray-700 text-sm text-left ml-2" :href="getArticleLink(article)" target="_blank"
+            <a class="text-gray-700 text-sm mr-auto ml-2" :href="getArticleLink(article)" target="_blank"
               rel="noreferrer noopener">
               <div class="grid" style="grid-template-columns: auto 1fr;" :title="article.title">
                 <div class="text-green-700 font-medium whitespace-no-wrap">
@@ -174,6 +174,15 @@
         </div>
       </template>
     </template>
+    <!-- floating help -->
+    <div class="fixed bottom-0 right-0 pb-4 pr-8 flex items-center bg-white rounded">
+      <a class="h-8 w-8 mr-1" href="https://twitter.com/mercadotrack" target="_blank" rel="noreferrer noopener">
+        <img src="/images/twitter-logo.svg" alt="Twitter">
+      </a>
+      <a href="mailto:mercadotrack@gmail.com" target="_blank" rel="noreferrer noopener">
+        <i class="material-icons text-2xl">email</i>
+      </a>
+    </div>
   </div>
 
   <script type="text/javascript" src="./scripts/popup.bundle.js"></script>
