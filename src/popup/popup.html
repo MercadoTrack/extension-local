@@ -113,10 +113,12 @@
       <a href="https://mercadotrack.com" class="mr-auto flex items-center" target="_blank" rel="noreferrer noopener">
         <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-10 w-10" />
       </a>
-      <h1 class="text-base font-medium">
+      <a class="text-base text-black font-medium flex items-center" href="https://mercadotrack.com/favoritos"
+        target="_blank" rel="noreferrer noopener">
         <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
         <span v-else>{{ user.email }}</span>
-      </h1>
+        <img v-if="user.picture" :src="user.picture" alt="Avatar" class="ml-2 h-8 w-8 rounded-full">
+      </a>
     </div>
     <!-- loading favorites -->
     <div v-if="loading" class="text-sm font-medium text-center" :class="{ 'mt-48': !hasOldData, 'mt-16': hasOldData }">
@@ -175,12 +177,12 @@
       </template>
     </template>
     <!-- floating help -->
-    <div class="fixed bottom-0 right-0 pb-4 pr-8 flex items-center bg-white rounded">
+    <div class="fixed bottom-0 right-0 pb-2 pr-4 flex items-center bg-white rounded">
       <a class="h-8 w-8 mr-1" href="https://twitter.com/mercadotrack" target="_blank" rel="noreferrer noopener">
         <img src="/images/twitter-logo.svg" alt="Twitter">
       </a>
-      <a href="mailto:mercadotrack@gmail.com" target="_blank" rel="noreferrer noopener">
-        <i class="material-icons text-2xl">email</i>
+      <a class="p-1" href="mailto:mercadotrack@gmail.com" target="_blank" rel="noreferrer noopener">
+        <img class="h-8 w-8 p-1" src="/images/gmail-icon.svg" alt="Gmail">
       </a>
     </div>
   </div>
