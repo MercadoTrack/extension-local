@@ -70,7 +70,7 @@
         la extension, estos datos ya no se utilizaran asi que podes
         descargarlos haciendo click
         <a role="button" @click="downloadOldData">aca <i class="material-icons text-xs">get_app</i></a>
-        (formato JSON). Cualquier consulta pueden contactarnos por
+        (formato JSON). Cualquier consulta podes contactarnos por
         <a href="https://twitter.com/mercadotrack" target="_blank" rel="noopener noreferrer">twitter</a>
         o
         <a href="mailto:mercadotrack@gmail.com" target="_blank" rel="noopener noreferrer">correo electronico</a>
@@ -91,7 +91,8 @@
       </div>
     </div>
     <!-- authenticating -->
-    <div v-if="authenticating" class="mt-56 text-sm font-medium text-center">
+    <div v-if="authenticating" class="text-sm font-medium text-center"
+      :class="{ 'mt-56': !hasOldData, 'mt-16': hasOldData }">
       <i class="material-icons loading-spinner mt-blue-color">sync</i>
       Esperando inicio de sesion...
     </div>
@@ -107,10 +108,10 @@
       </div>
     </div>
     <!-- navbar (logged in) -->
-    <div v-if="auth && user" class="pb-2 flex items-center border-b border-gray-300"
-      :class="{ 'my-4': hasOldData, 'mb-4': !hasOldData }">
+    <div v-if="auth && user" class="mb-4 pb-2 pt-4 flex items-center border-b border-gray-300 sticky bg-white z-10"
+      style="top: -0.5rem;">
       <a href="https://mercadotrack.com" class="mr-auto flex items-center" target="_blank" rel="noreferrer noopener">
-        <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-8 w-8" />
+        <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-10 w-10" />
       </a>
       <h1 class="text-base font-medium">
         <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
@@ -118,12 +119,12 @@
       </h1>
     </div>
     <!-- loading favorites -->
-    <div v-if="loading" class="mt-48 text-sm font-medium text-center">
+    <div v-if="loading" class="text-sm font-medium text-center" :class="{ 'mt-48': !hasOldData, 'mt-16': hasOldData }">
       <i class="material-icons loading-spinner mt-blue-color">sync</i>
       Cargando tus articulos favoritos...
     </div>
     <!-- finished loading favorites -->
-    <div v-else>
+    <template v-else>
       <!-- favorites show -->
       <div v-if="articles.length" class="mb-4">
         <p class="pb-2 text-sm font-medium text-left">
@@ -160,17 +161,19 @@
         </div>
       </div>
       <!-- no favs or errors -->
-      <div v-else>
-        <div v-if="auth">
-          <h1 v-if="getArticlesError" class="text-base font-medium">
-            {{ getArticlesError }}
+      <template v-else v-if="auth">
+        <h1 v-if="getArticlesError" class="text-base font-medium">
+          {{ getArticlesError }}
+        </h1>
+        <div v-else class="mt-12 font-sm text-base text-center">
+          <h1>
+            Todavia tenes ningun favorito en <a href="https://mercadotrack.com" target="_blank"
+              rel="noreferrer noopener">Mercadotrack</a>
           </h1>
-          <h1 v-else class="text-base font-medium">
-            Todavia no estas trackeando ningun articulo en Mercadotrack.
-          </h1>
+          <h1>Agrega algunos para verlos aca</h1>
         </div>
-      </div>
-    </div>
+      </template>
+    </template>
   </div>
 
   <script type="text/javascript" src="./scripts/popup.bundle.js"></script>
