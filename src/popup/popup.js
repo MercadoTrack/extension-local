@@ -50,7 +50,6 @@ new Vue({
         })
         .then(({ data }) => {
           this.articles = data;
-          console.log(data);
         })
         .catch((err) => {
           if (err.response.status == 403) {

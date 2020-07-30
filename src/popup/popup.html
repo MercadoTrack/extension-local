@@ -63,25 +63,40 @@
 
 <body>
   <div id="app" class="overflow-auto py-2 px-4">
-    <!-- old data banner -->
-    <div v-if="hasOldData" class="text-center">
-      <p class=" font-light text-xs my-4 pb-0">
-        Estabas trackeando articulos de forma local con nuestra version anterior, esos datos seran
-        eliminados muy pronto pero podes descargarlos en formato JSON haciendo
-        <a class="font-medium underline" role="button" @click="downloadOldData">click aca <i
-            class="material-icons text-xs">get_app</i></a>
-      </p>
-      <div class="text-xs">
-        <button @click="clearOldData">
-          Ya lo descargue / No me interesan esos datos
-        </button>
-        <p class="font-light py-3 border-b border-gray-300">
-          <i class="material-icons text-sm text-orange-400">warning</i>
-          <span>
-            Esto borrara los datos viejos y ya no
-            podran ser descargados
-          </span>
+    <!-- navbar (logged in) -->
+    <div v-if="auth && user" class="sticky bg-white z-10" style="top: -0.5rem;">
+      <!-- navbar-->
+      <div class="mb-4 py-2 flex items-center border-b border-gray-300">
+        <a href="https://mercadotrack.com" class="mr-auto flex items-center" target="_blank" rel="noreferrer noopener">
+          <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-10 w-10" />
+        </a>
+        <a class="text-base text-black font-medium flex items-center" href="https://mercadotrack.com/favoritos"
+          target="_blank" rel="noreferrer noopener">
+          <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
+          <span v-else>{{ user.email }}</span>
+          <img v-if="user.picture" :src="user.picture" alt="Avatar" class="ml-2 h-8 w-8 rounded-full">
+        </a>
+      </div>
+      <!-- old data banner -->
+      <div v-if="hasOldData" class="text-center">
+        <p class=" font-light text-xs my-4 pb-0">
+          Estabas trackeando articulos de forma local con nuestra version anterior, esos datos seran
+          eliminados muy pronto pero podes descargarlos en formato JSON haciendo
+          <a class="font-medium underline" role="button" @click="downloadOldData">click aca <i
+              class="material-icons text-xs">get_app</i></a>
         </p>
+        <div class="text-xs">
+          <button @click="clearOldData">
+            Ya lo descargue / No me interesan esos datos
+          </button>
+          <p class="font-light py-3 border-b border-gray-300">
+            <i class="material-icons text-sm text-orange-400">warning</i>
+            <span>
+              Esto borrara los datos viejos y ya no
+              podran ser descargados
+            </span>
+          </p>
+        </div>
       </div>
     </div>
     <!-- authenticating -->
@@ -91,8 +106,29 @@
       Esperando inicio de sesion...
     </div>
     <!-- not logged in -->
-    <div v-if="!authenticating && !auth" class="flex items-center justify-center"
-      :class="{ 'h-full': !hasOldData, 'mt-24': hasOldData }">
+    <div v-if="!authenticating && !auth" class="flex flex-col items-center justify-center"
+      :class="{ 'h-full': !hasOldData }">
+      <!-- old data banner -->
+      <div v-if="hasOldData" class="text-center mb-24">
+        <p class=" font-light text-xs my-4 pb-0">
+          Estabas trackeando articulos de forma local con nuestra version anterior, esos datos seran
+          eliminados muy pronto pero podes descargarlos en formato JSON haciendo
+          <a class="font-medium underline" role="button" @click="downloadOldData">click aca <i
+              class="material-icons text-xs">get_app</i></a>
+        </p>
+        <div class="text-xs">
+          <button @click="clearOldData">
+            Ya lo descargue / No me interesan esos datos
+          </button>
+          <p class="font-light py-3 border-b border-gray-300">
+            <i class="material-icons text-sm text-orange-400">warning</i>
+            <span>
+              Esto borrara los datos viejos y ya no
+              podran ser descargados
+            </span>
+          </p>
+        </div>
+      </div>
       <div class="font-medium text-base">
         <p class="m-0 text-lg text-center">Inicia sesion con</p>
         <button @click="login" class="mt-2 mb-8 mx-auto flex items-center text-lg" type="button">
@@ -100,19 +136,6 @@
           <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-8 ml-2" />
         </button>
       </div>
-    </div>
-    <!-- navbar (logged in) -->
-    <div v-if="auth && user" class="mb-4 pb-2 flex items-center border-b border-gray-300 sticky bg-white z-10"
-      :class="{ 'pt-2': !hasOldData, 'pt-4': hasOldData }" style="top: -0.5rem;">
-      <a href="https://mercadotrack.com" class="mr-auto flex items-center" target="_blank" rel="noreferrer noopener">
-        <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-10 w-10" />
-      </a>
-      <a class="text-base text-black font-medium flex items-center" href="https://mercadotrack.com/favoritos"
-        target="_blank" rel="noreferrer noopener">
-        <span v-if="user.given_name">{{ user.given_name }} {{ user.family_name }}</span>
-        <span v-else>{{ user.email }}</span>
-        <img v-if="user.picture" :src="user.picture" alt="Avatar" class="ml-2 h-8 w-8 rounded-full">
-      </a>
     </div>
     <!-- loading favorites -->
     <div v-if="loading" class="text-sm font-medium text-center" :class="{ 'mt-48': !hasOldData, 'mt-16': hasOldData }">
@@ -122,9 +145,9 @@
     <!-- finished loading favorites -->
     <template v-else>
       <!-- favorites show -->
-      <div v-if="articles.length" class="mb-12">
+      <div v-if="articles.length" class="pt-2 mb-12">
         <p class="pb-2 text-sm font-medium text-left">
-          Estos son tus favoritos:
+          Mis favoritos
         </p>
         <div v-for="article in articles"
           class="border-b last-border-0 border-gray-300 py-2 flex items-center flex-wrap">
