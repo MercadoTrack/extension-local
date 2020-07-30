@@ -64,30 +64,24 @@
 <body>
   <div id="app" class="overflow-auto py-2 px-4">
     <!-- old data banner -->
-    <div v-if="hasOldData" class="text-center font-medium">
-      <h1 class="text-xs font-medium my-4 pb-4 border-b border-gray-300">
-        Tenias articulos trackeados de forma local en la version anterior de
-        la extension, estos datos ya no se utilizaran asi que podes
-        descargarlos haciendo click
-        <a role="button" @click="downloadOldData">aca <i class="material-icons text-xs">get_app</i></a>
-        (formato JSON). Cualquier consulta podes contactarnos por
-        <a href="https://twitter.com/mercadotrack" target="_blank" rel="noopener noreferrer">twitter</a>
-        o
-        <a href="mailto:mercadotrack@gmail.com" target="_blank" rel="noopener noreferrer">correo electronico</a>
-      </h1>
+    <div v-if="hasOldData" class="text-center">
+      <p class=" font-light text-xs my-4 pb-0">
+        Estabas trackeando articulos de forma local con nuestra version anterior, esos datos seran
+        eliminados muy pronto pero podes descargarlos en formato JSON haciendo
+        <a class="font-medium underline" role="button" @click="downloadOldData">click aca <i
+            class="material-icons text-xs">get_app</i></a>
+      </p>
       <div class="text-xs">
-        <a role="button" @click="clearOldData">
-          <p>
-            Ya lo descargue / No me interesan esos datos
-          </p>
-          <p>
-            <i class="material-icons text-sm text-orange-400">warning</i>
-            <span class="underline">
-              Advertencia: Hacer click aqui borrara los datos viejos y ya no
-              podran ser descargados
-            </span>
-          </p>
-        </a>
+        <button @click="clearOldData">
+          Ya lo descargue / No me interesan esos datos
+        </button>
+        <p class="font-light py-3 border-b border-gray-300">
+          <i class="material-icons text-sm text-orange-400">warning</i>
+          <span>
+            Esto borrara los datos viejos y ya no
+            podran ser descargados
+          </span>
+        </p>
       </div>
     </div>
     <!-- authenticating -->
@@ -100,16 +94,16 @@
     <div v-if="!authenticating && !auth" class="flex items-center justify-center"
       :class="{ 'h-full': !hasOldData, 'mt-24': hasOldData }">
       <div class="font-medium text-base">
-        <p class="m-0 text-lg">Inicia sesion con tu</p>
+        <p class="m-0 text-lg text-center">Inicia sesion con</p>
         <button @click="login" class="mt-2 mb-8 mx-auto flex items-center text-lg" type="button">
-          cuenta de
+          MercadoTrack
           <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-8 ml-2" />
         </button>
       </div>
     </div>
     <!-- navbar (logged in) -->
-    <div v-if="auth && user" class="mb-4 pb-2 pt-4 flex items-center border-b border-gray-300 sticky bg-white z-10"
-      style="top: -0.5rem;">
+    <div v-if="auth && user" class="mb-4 pb-2 flex items-center border-b border-gray-300 sticky bg-white z-10"
+      :class="{ 'pt-2': !hasOldData, 'pt-4': hasOldData }" style="top: -0.5rem;">
       <a href="https://mercadotrack.com" class="mr-auto flex items-center" target="_blank" rel="noreferrer noopener">
         <img src="../images/icon_128.png" alt="Mercadotrack logo" class="h-10 w-10" />
       </a>
@@ -177,7 +171,11 @@
       </template>
     </template>
     <!-- floating help -->
-    <div class="fixed bottom-0 right-0 pb-2 pr-4 flex items-center bg-white rounded">
+    <div class="fixed bottom-0 font-light right-0 pb-2 pr-4 flex items-center bg-white rounded">
+      Contactanos en
+      <a class="h-8 w-8 mx-1" href="https://www.instagram.com/mercadotrack/" target="_blank" rel="noreferrer noopener">
+        <img src="/images/ig-icon.png" alt="Instagram">
+      </a>
       <a class="h-8 w-8 mr-1" href="https://twitter.com/mercadotrack" target="_blank" rel="noreferrer noopener">
         <img src="/images/twitter-logo.svg" alt="Twitter">
       </a>
