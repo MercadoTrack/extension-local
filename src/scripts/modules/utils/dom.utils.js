@@ -12,8 +12,9 @@ export default {
     getChartSiblin() {
         const shortDescription = document.getElementById('shortDescription');
         const productGalleryCollection = document.getElementById('productGalleryCollection');
-        if(!shortDescription && !productGalleryCollection) throw new Error(FATAL_ERROR)
-        return shortDescription || productGalleryCollection
+        const productContainer = document.querySelector('.ui-pdp-container__row.ui-pdp-container__row--gallery');
+        if (!shortDescription && !productGalleryCollection && !productContainer) throw new Error(FATAL_ERROR)
+        return shortDescription || productGalleryCollection || productContainer
     },
 
     initDOM(itemsCount) {
@@ -55,12 +56,16 @@ function toggleCanvas(canvas) {
 }
 
 function addToggleBtnBehavior(toggleBtn, canvas, itemsCount) {
-    const showText = `Ver grafico <sup>(${itemsCount})</sup>`
-    const hideText = 'Esconder grafico'
-    toggleBtn.innerHTML = showText
+    const showHtml = `<span class="andes-button__content">
+        Ver grafico (${itemsCount})
+    </span>`
+    const hideHtml = `<span class="andes-button__content">
+        Esconder grafico
+    </span>`
+    toggleBtn.innerHTML = showHtml
     toggleBtn.addEventListener('click', () => {
         const display = toggleCanvas(canvas)
-        toggleBtn.innerHTML = display === 'none' ? showText : hideText
+        toggleBtn.innerHTML = display === 'none' ? showHtml : hideHtml
     })
 }
 

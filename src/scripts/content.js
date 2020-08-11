@@ -3,12 +3,14 @@ import Storage from './modules/storage'
 import Graph from './modules/graph'
 import DomUtils from './modules/utils/dom.utils'
 
-const [ marketId, itemId ] = getIdsFromUrl(window.location.pathname)
+const [marketId, itemId] = getIdsFromUrl(window.location.pathname)
 const $chartSiblin = DomUtils.getChartSiblin();
 
-Storage.get(itemId)
-    .then(handleSuccess)
-    .catch(handleFail);
+setTimeout(() => {
+    Storage.get(itemId)
+        .then(handleSuccess)
+        .catch(handleFail);
+}, 1500)
 
 /* item was being tracked */
 function handleSuccess(result) {
@@ -32,7 +34,7 @@ function trackBtnAction() {
     Item.fetch(marketId, itemId).then(data => {
         const container = this.parentNode
         /* calm down with those clicks */
-        if(!container.parentNode) return
+        if (!container.parentNode) return
         container.parentNode.removeChild(container)
         let item = new Item(data)
         saveAndGraph(item)
