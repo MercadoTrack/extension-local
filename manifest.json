@@ -1,9 +1,9 @@
 {
     "author": "Guillermo Maiolo",
     "manifest_version": 2,
-    "name": "MercadoTrack",
-    "description": "MercadoTrack",
-    "version": "0.6.1",
+    "name": "MercadoTrack (local)",
+    "description": "MercadoTrack de uso exclusivamente local, trackea los datos localmente en tu computadora.",
+    "version": "0.6.2",
     "permissions": [
         "storage",
         "unlimitedStorage"
