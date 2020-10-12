@@ -20,7 +20,6 @@ new Vue({
     articles: [],
     getArticlesError: null,
     unfoldedArticle: null,
-    hasOldData: false,
   }),
   methods: {
     login() {
@@ -71,24 +70,6 @@ new Vue({
     isUnfolded(article) {
       return this.unfoldedArticle === article.id;
     },
-    downloadOldData() {
-      chrome.storage.local.get(null, (items) => {
-        const str = JSON.stringify(items, null, 2);
-        chrome.downloads.download({
-          url: URL.createObjectURL(
-            new Blob([str], { type: "application/json" })
-          ),
-          filename: "mercadotrack-legacy.json",
-        });
-      });
-    },
-    clearOldData() {
-      chrome.storage.local.clear(() => {
-        chrome.storage.local.get(null, (items) => {
-          this.hasOldData = Boolean(items && Object.keys(items).length);
-        });
-      });
-    },
   },
   created() {
     if (this.auth && this.auth.id_token) {
@@ -102,8 +83,5 @@ new Vue({
         this.loading = false;
       });
     }
-    chrome.storage.local.get(null, (items) => {
-      this.hasOldData = Boolean(items && Object.keys(items).length);
-    });
   },
 });
