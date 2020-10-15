@@ -11,7 +11,7 @@
     <div id="app">
         <div class="items-container" v-if="items.length">
             <div v-for="item in items" class="item">
-                <button @click="remove(item)" class="remove-item-btn btn waves-effect waves-light yellow">
+                <button @click="remove(item)" class="remove-item-btn btn waves-effect waves-light">
                 <i class="material-icons">delete</i>
             </button>
                 <a class="title-wrapper" :href="item.permalink" target="_blank">
@@ -19,7 +19,7 @@
                     <span class="price">{{ item.price | price }}</span> - {{ item.title | title }}
                 </span>
             </a>
-                <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show indigo" type="button">
+                <button @click="toggleHistory(item)" class="btn waves-effect waves-light btn-show color-primary" type="button">
                 <i v-if="isShowingHistory(item)" class="material-icons">keyboard_arrow_up</i>
                 <i v-else class="material-icons">keyboard_arrow_down</i>
             </button>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="size-and-clear">
-            <button class="waves-effect waves-light btn indigo" title="Clear all items" id="clear" @click="clear">
+            <button class="waves-effect waves-light btn color-primary" title="Clear all items" id="clear" @click="clear">
                 <span class="btn-text">Limpiar</span>
                 <i class="material-icons">delete</i>
             </button>

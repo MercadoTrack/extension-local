@@ -56,8 +56,8 @@ export default {
 }
 
 function getItemGraphDataset(item) {
-    const yellowHalf = 'rgba(255, 219, 21, 0.5)';
-    const border = 'rgba(244, 188, 66, 1)';
+    const yellowHalf = 'rgba(18,148,150, 0.5)';
+    const border = '#129496';
     const hoverBorder = 'rgba(0, 0, 0, 0.5)';
     const white = '#FFF';
     return {
