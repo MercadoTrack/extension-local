@@ -20,7 +20,8 @@ export default class Item {
     }
 
     static fetch(marketId, id) {
-        return fetch(createEndpoint(marketId, id))
+        const endpoint = `https://api.mercadolibre.com/items/${marketId || 'MLA'}${id}`
+        return fetch(endpoint)
             .then(pipeResponse)
             .then(res => res.json())
     }
@@ -44,7 +45,7 @@ export default class Item {
     }
 
     get endpoint() {
-        return createEndpoint(this.market, this.id);
+        return `https://api.mercadolibre.com/items/${this.market || 'MLA'}${this.id}`;
     }
 
 }
@@ -64,9 +65,4 @@ function pipeResponse(response) {
         throw Error(response.statusText);
     }
     return response;
-}
-
-function createEndpoint(marketId, id) {
-    const defaultMarket = 'MLA';
-    return `https://api.mercadotrack.com/articles/ml/${marketId || defaultMarket}${id}`;
 }

@@ -31,13 +31,15 @@ function handleFail() {
 }
 
 function trackBtnAction() {
-    Item.fetch(marketId, itemId).then(data => {
-        const container = this.parentNode
-        /* calm down with those clicks */
-        if (!container.parentNode) return
-        container.parentNode.removeChild(container)
-        let item = new Item(data)
-        saveAndGraph(item)
+    window.chrome.runtime.sendMessage({ cmd: 'fetch', data: { marketId, itemId } }, (response) => {
+        if (response && response.data) {
+            const container = this.parentNode
+            /* calm down with those clicks */
+            if (!container.parentNode) return
+            container.parentNode.removeChild(container)
+            let item = new Item(response.data)
+            saveAndGraph(item)
+        }
     })
 }
 
