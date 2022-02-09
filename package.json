@@ -20,7 +20,7 @@
   "dependencies": {
     "chart.js": "2.5.0",
     "materialize-css": "^0.98.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "vue": "1.0.28-csp",
     "vuex": "^1.0.0"
   },
