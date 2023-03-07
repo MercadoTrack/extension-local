@@ -1,52 +1,66 @@
 {
-    "author": "Guillermo Maiolo",
-    "manifest_version": 2,
-    "name": "MercadoTrack (Local)",
-    "description": "MercadoTrack de uso exclusivamente local, trackea los datos localmente en tu computadora.",
-    "version": "0.7.0",
-    "permissions": [
-        "storage",
-        "unlimitedStorage"
-    ],
-    "icons": {
-        "128": "images/icon_128.png"
-    },
-    "browser_action": {
-        "default_title": "MercadoTrack",
-        "default_popup": "popup.html"
-    },
-    "background": {
-        "scripts": [
-            "scripts/background.bundle.js"
-        ]
-    },
-    "content_scripts": [
-        {
-            "js": [
-                "scripts/content.bundle.js"
-            ],
-            "matches": [
-                "*://articulo.mercadolibre.com.ar/*",
-                "*://articulo.mercadolibre.com.ve/*",
-                "*://articulo.mercadolibre.com.bo/*",
-                "*://articulo.mercadolibre.cl/*",
-                "*://articulo.mercadolibre.com.co/*",
-                "*://articulo.mercadolibre.co.cr/*",
-                "*://articulo.mercadolibre.com.do/*",
-                "*://articulo.mercadolibre.com.ec/*",
-                "*://articulo.mercadolibre.com.gt/*",
-                "*://articulo.mercadolibre.com.hn/*",
-                "*://articulo.mercadolibre.com.mx/*",
-                "*://articulo.mercadolibre.com.ni/*",
-                "*://articulo.mercadolibre.com.pa/*",
-                "*://articulo.mercadolibre.com.py/*",
-                "*://articulo.mercadolibre.com.pe/*",
-                "*://articulo.mercadolibre.com.sv/*",
-                "*://articulo.mercadolibre.com.uy/*",
-                "*://produto.mercadolivre.com.br/*",
-                "*://anuncio.mercadolivre.pt/*"
-            ],
-            "run_at": "document_end"
-        }
-    ]
+  "author": "Guillermo Maiolo",
+  "manifest_version": 3,
+  "name": "MercadoTrack (Local)",
+  "description": "MercadoTrack de uso exclusivamente local, trackea los datos localmente en tu computadora.",
+  "version": "0.7.0",
+  "permissions": ["storage", "unlimitedStorage"],
+  "icons": {
+    "128": "images/icon_128.png"
+  },
+  "action": {
+    "default_title": "MercadoTrack",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "scripts/background.bundle.js"
+  },
+  "host_permissions": [
+    "*://*.mercadolibre.com.ar/*",
+    "*://*.mercadolibre.com.ve/*",
+    "*://*.mercadolibre.com.bo/*",
+    "*://*.mercadolibre.cl/*",
+    "*://*.mercadolibre.com.co/*",
+    "*://*.mercadolibre.co.cr/*",
+    "*://*.mercadolibre.com.do/*",
+    "*://*.mercadolibre.com.ec/*",
+    "*://*.mercadolibre.com.gt/*",
+    "*://*.mercadolibre.com.hn/*",
+    "*://*.mercadolibre.com.mx/*",
+    "*://*.mercadolibre.com.ni/*",
+    "*://*.mercadolibre.com.pa/*",
+    "*://*.mercadolibre.com.py/*",
+    "*://*.mercadolibre.com.pe/*",
+    "*://*.mercadolibre.com.sv/*",
+    "*://*.mercadolibre.com.uy/*",
+    "*://*.mercadolivre.com.br/*",
+    "*://*.mercadolivre.pt/*"
+  ],
+  "content_scripts": [
+    {
+      "js": ["scripts/content.bundle.js"],
+      "matches": [
+        "*://*.mercadolibre.com.ar/*",
+        "*://*.mercadolibre.com.ve/*",
+        "*://*.mercadolibre.com.bo/*",
+        "*://*.mercadolibre.cl/*",
+        "*://*.mercadolibre.com.co/*",
+        "*://*.mercadolibre.co.cr/*",
+        "*://*.mercadolibre.com.do/*",
+        "*://*.mercadolibre.com.ec/*",
+        "*://*.mercadolibre.com.gt/*",
+        "*://*.mercadolibre.com.hn/*",
+        "*://*.mercadolibre.com.mx/*",
+        "*://*.mercadolibre.com.ni/*",
+        "*://*.mercadolibre.com.pa/*",
+        "*://*.mercadolibre.com.py/*",
+        "*://*.mercadolibre.com.pe/*",
+        "*://*.mercadolibre.com.sv/*",
+        "*://*.mercadolibre.com.uy/*",
+        "*://*.mercadolivre.com.br/*",
+        "*://*.mercadolivre.pt/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }
