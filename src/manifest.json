@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "author": "Guillermo Maiolo",
+  "name": "MercadoTrack",
+  "description": "Seguí los artículos de MercadoLibre y mirá las variaciones en sus precios a lo largo del tiempo",
+  "version": "0.9.0",
+  "permissions": [],
+  "icons": {
+    "128": "images/icon_128.png"
+  },
+  "action": {
+    "default_title": "MercadoTrack"
+  },
+  "content_scripts": [
+    {
+      "type": "module",
+      "js": ["/inject/inject.js"],
+      "runAt": "document_idle",
+      "matches": [
+        "*://*.mercadolibre.com.ar/*",
+        "*://*.mercadolibre.com.ve/*",
+        "*://*.mercadolibre.com.bo/*",
+        "*://*.mercadolibre.cl/*",
+        "*://*.mercadolibre.com.co/*",
+        "*://*.mercadolibre.co.cr/*",
+        "*://*.mercadolibre.com.do/*",
+        "*://*.mercadolibre.com.ec/*",
+        "*://*.mercadolibre.com.gt/*",
+        "*://*.mercadolibre.com.hn/*",
+        "*://*.mercadolibre.com.mx/*",
+        "*://*.mercadolibre.com.ni/*",
+        "*://*.mercadolibre.com.pa/*",
+        "*://*.mercadolibre.com.py/*",
+        "*://*.mercadolibre.com.pe/*",
+        "*://*.mercadolibre.com.sv/*",
+        "*://*.mercadolibre.com.uy/*",
+        "*://*.mercadolivre.com.br/*",
+        "*://*.mercadolivre.pt/*"
+      ]
+    }
+  ],
+  "host_permissions": [
+    "*://*.mercadolibre.com.ar/*",
+    "*://*.mercadolibre.com.ve/*",
+    "*://*.mercadolibre.com.bo/*",
+    "*://*.mercadolibre.cl/*",
+    "*://*.mercadolibre.com.co/*",
+    "*://*.mercadolibre.co.cr/*",
+    "*://*.mercadolibre.com.do/*",
+    "*://*.mercadolibre.com.ec/*",
+    "*://*.mercadolibre.com.gt/*",
+    "*://*.mercadolibre.com.hn/*",
+    "*://*.mercadolibre.com.mx/*",
+    "*://*.mercadolibre.com.ni/*",
+    "*://*.mercadolibre.com.pa/*",
+    "*://*.mercadolibre.com.py/*",
+    "*://*.mercadolibre.com.pe/*",
+    "*://*.mercadolibre.com.sv/*",
+    "*://*.mercadolibre.com.uy/*",
+    "*://*.mercadolivre.com.br/*",
+    "*://*.mercadolivre.pt/*"
+  ]
+}
